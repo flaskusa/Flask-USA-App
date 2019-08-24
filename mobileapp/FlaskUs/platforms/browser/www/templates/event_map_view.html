@@ -1,0 +1,701 @@
+<ion-view cache-view="false" class="customFooter">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button class="button-icon icon  ion-ios-arrow-back ">
+        </ion-nav-back-button>
+        <ion-nav-title>
+            <a href="#/app/events"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button ng-if="showSearchBox.value==true" class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox ; searchObj.searchString=''"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <div class="bar bar-subheader groupSearch" ng-if="searchBox.showBox">
+        <div class="row searchrow">
+            <div class="col col-100 col-center searchrow">
+                <input type="text" name="unitaccNumber" id="inputFilter" placeholder="Search..." class="searchboxArea" ng-model="searchObj.searchString" ng-keydown="onSearchKeyDown()" />
+            </div>
+        </div>
+    </div>
+    <div class="dropdown" ng-if="searchObj.searchString.length != 0 && searchBox.showBox==true && showsearchDrop.value==true">
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchParkingMarker.length==0}" ng-if="preEventSearch==true && selectedIndex==0">
+
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchParkingMarker  = (searchParkingMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchParkingMarker.length==0">
+                No matches found for search "{{searchObj.searchString}}"
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarker.length==0}" ng-if="preEventSearch==true && selectedIndex==1">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchBarMarker= (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchBarMarker.length==0">
+                No matches found for search "{{searchObj.searchString}}"
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarkes.length==0}" ng-if="duringEventSearch==true && selectedIndex==2">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchBarMarkes = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchBarMarkes.length==0">
+                No matches found for search "{{searchObj.searchString}}"
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarke.length==0}" ng-if="postEventSearch==true && selectedIndex==0">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchBarMarke = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchBarMarke.length==0">
+                No matches found for search "{{searchObj.searchString}}"
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchHotelMarker.length==0}" ng-if="postEventSearch==true && selectedIndex==2">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchHotelMarker = (searchHotelMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchHotelMarker.length==0">
+                No matches found for search "{{searchObj.searchString}}"
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchNightLifesMarker.length==0}" ng-if="postEventSearch==true && selectedIndex==1">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchNightLifesMarker = (searchNightLifesMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchNightLifesMarker.length==0">
+                No matches found for search "{{searchObj.searchString}}"
+            </li>
+        </ul>
+    </div>
+    <div class="bar bar-subheader " ng-class="{removeBorderTraffic:selectedIndex == 3}" ng-if="!searchBox.showBox">
+        <div class="row">
+                <div class="eventHeading2">
+                    <span class="overlineStyle" ng-if="changeTitle != 3">{{eventName}}</span>
+                    <span class="overlineStyle fontSizeTrafficHeading" ng-if="changeTitle ==true">TIPS TO GET AROUND TRAFFIC</span>
+                </div>
+        </div>
+    </div>
+    <ion-content class="has-footer has-header has-subheader" scroll="false">
+        <script type="text/ng-template" id="searchbox.tpl.html" autocomplete="false" class="">
+            <input type="text" class="map_input" placeholder="" />
+        </script>
+        <script type="text/ng-template" id="custom.controls.tpl.html">
+            <table>
+                <tr><td> <button ng-click="selectFlaskMarker()"> Flask</button></td> </tr>
+                <tr><td> <button ng-click="selectGoogleMarker()"> Google</button></td> </tr>
+            </table>
+        </script>
+        <script type="text/ng-template" id="markerParkingInfo.tpl.html">
+            <div id="iw-container">
+                <div class="iw-title">
+                    <table class="iw-fixed-title">
+                        <tr>
+                            <td class="iw-fixed-title">
+                                <div class="parent_div" >
+                                    <div class="text_div tungsten">{{parameter.infoTitle}}</div>
+                                </div>
+                            </td>
+                            <td rowspan="2" class="parkingInfo">
+                                <div class="iw-content-toggle map_info_img">
+                                    <img src="img/map_icons/circle_arrow_left.svg">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="iw-fixed-title">
+                                <div class="iw-sub-title tungsten">
+                                    {{parameter.subTitle}}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="iw-content">
+                    <div>
+                        <table class="iw-fixed-title">
+                            <tr>
+                                <td colspan="2">
+                                    <div class="alignLeft">
+                                        <span class="iw-sub-title1" ng-bind="parameter.addrLine1"> </span>
+                                        <div class="biggerFont tungsten"> {{parameter.cost}}</div>
+                                        <div class="emailText smallerFont tungsten"> {{parameter.infoShortDesc}}</div>
+                                        <div ng-bind-html="parameter.infoDesc" class="placedetail_div tungsten"> </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="iw-content-icon"><img src="img/map_icons/take_me_there.svg"> </td>
+                                <td class="iw-content-text" style="vertical-align: middle !important;"> <a id="iwTakeMeThere"><span>Take me there </span></a> </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </script>
+        <script type="text/ng-template" id="markerBarInfo.tpl.html">
+            <div id="iw-container">
+                <div class="iw-title">
+                    <table class="iw-fixed-title">
+                        <tr>
+                            <td class="iw-fixed-title">
+                                <div class="parent_div">
+                                    <div class="text_div">{{parameter.infoTitle}}</div>
+                                </div>
+                            </td>
+                            <td rowspan="2" class="parkingInfo">  <div class="iw-content-toggle map_info_img"> <img src="img/map_icons/circle_arrow_left.svg"> </div>
+                        </tr>
+                        <tr>
+                            <td class="iw-fixed-title">
+                                <div class="iw-sub-title">
+                                    {{parameter.addrLine1}}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="iw-content">
+                    <div class="iw-content-div">
+                        <table class="iw-fixed-title">
+                            <tr>
+                                <td class="iw-content-icon alignRight"><img src="img/map_icons/callnow.svg" class="map_info_img"> </td>
+                                <td class="iw-content-text"><a id="iwCallNow"> Call Now </a> </td>
+                            </tr>
+                            <tr>
+                                <td class="iw-content-icon alignRight"><img src="img/map_icons/website.svg" class="map_info_img"> </td>
+                                <td class="iw-content-text"><a id="iwViewWebsite"> View Website </a> </td>
+                            </tr>
+                            <tr>
+                                <td class="iw-content-icon alignRight"><img src="img/map_icons/take_me_there.svg" class="map_info_img"> </td>
+                                <td class="iw-content-text"><a id="iwTakeMeThere"> Take me there </a> </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <div ng-if="infoTypeName == 'Pre-Event'" class="Pre-Event">
+            <ion-tabs class="tabs-positive tab_bottom">
+                <ion-tab title="PARKING" ng-click="selectTab(0)">
+                    <div id="parkingDiv" class="tab_div" ng-if="selectedIndex == 0" data-tap-disabled="true">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" idkey="id" control="map.control" events="map.events">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <!--<ui-gmap-map-control template="custom.controls.tpl.html" index="-1"	position="RIGHT_CENTER" controller = "refreshMap"> </ui-gmap-map-control>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniFlaskButton" ng-click="selectFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <a class="miniDollarButton" ng-click="openPopover1($event)"></a>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniGoogleButton" ng-click="selectGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=0>
+                            </ui-gmap-marker>
+                            <!--for flask markers and icons-->
+                            <ui-gmap-markers models="parkingMarkers" coords="'self'"    icon="'icon'" options="markerOptions" click="onClick" control="markerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'" control="windowOptions.control">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <!--for google markers and icons-->
+                            <ui-gmap-markers models="parkingGoogleMarkers" coords="'self'"    icon="'icon'" options="googleMarkerOptions" click="onClick"
+                                             control="googleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 1" data-tap-disabled="true">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=01>
+                            </ui-gmap-marker>
+                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'"  options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'"  icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
+                                             control="barGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="TRAFFIC" ng-click="selectTab(2)">
+                    <div class="traffic_div" ng-if="selectedIndex == 2">
+                        <ion-content overflow-scroll="false" class="traffic_ion_content">
+                            <div class="traffic_details" ng-repeat="data in trafficDetails">
+                                <div align="center">
+                                    <div class="taffic_heading_div">
+                                        <i class="trafficDetailHeading">{{data.infoTitle}}</i>
+                                    </div>
+                                </div>
+                                <div class="TrafficInfoDescDiv">
+                                    <div id="traffic" class="" ng-bind-html="data.infoDesc">
+                                    </div>
+                                </div>
+                                <div ng-repeat="subdetail in data.trafficInfoSubDetail">
+                                    <div style="margin-bottom:10px;">
+                                        <div class="TrafficInfoDescDiv">
+                                            <div class="subDetails">
+                                                <i class="trafficSubDetailHeading" ng-if="subdetail.venueSubDetailTitle != ''">{{subdetail.venueSubDetailTitle}}</i>
+                                                
+                                            </div>
+                                            <i class="traffic" style="font-weight:normal !important;margin-left: 80px;">- {{subdetail.venueSubDetailDesc}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><br />
+                        </ion-content>
+                    </div>
+                </ion-tab>
+                <ion-tab title="FLASK US" ng-click="selectTab(3)">
+                    <div class="traffic_div" ng-if="selectedIndex == 3">
+                        <ion-content overflow-scroll="false" class="traffic_ion_content">
+                            <div>
+                                <div class="flask_us_div">
+                                    <div>
+                                        <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details" style="display: none;">
+                                            <div class="form-group">
+                                                <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
+                                                <div ng-if="flaskUsDetail.imageUrl && flaskUsDetail.length !=0">
+                                                    <img class="full-image" src={{flaskUsDetail.imageUrl}} onError="this.src='img/no-image-available.jpg'" style="width:100% !important; height: auto !important;">
+                                                </div>
+                                                <div class="form-group flask_us_form">
+                                                    <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                </div>
+                                                <div class="col-70 flask_us_detail_title" id="Descriptions">
+                                                    <div class="ion-star"></div>
+                                                    {{flaskUsDetail.infoDesc}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="eventHeading2 flaskEventHeading2">
+                                                <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
+                                            </div>
+                                            <div class="flaskUsQuestionDiv">
+                                                <form name="flaskus_form1" novalidate  ng-submit="flaskus_form1.$valid && toggleMsgDiv(flaskUsData)">
+                                                <div align="center">
+                                                    <span class="que-input-label"><b>NAME*</b></span>
+                                                    <input type="text" name="subject" ng-model="flaskUsData.subject" class="QuestionInput" style="padding:10px;" required>
+                                                    <div ng-show="flaskus_form1.$submitted || flaskus_form1.subject.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form1.subject.$error.required" style="float: left;" class="error_msg">Please enter Name</span>
+                                                    </div>
+                                                    <span class="que-input-label"><b>EMAIL*</b></span>
+                                                    <input type="email" style="padding:10px;" name="fromMail" ng-model="flaskUsData.fromMail" class="QuestionInput" required>
+                                                    <div ng-show="flaskus_form1.$submitted || flaskus_form1.fromMail.$touched"     class="ng-hide que-input-label">
+                                                        <span ng-show="flaskus_form1.fromMail.$error.required || flaskus_form1.fromMail.$error.email" style="float: left;" class="error_msg">Please enter valid email Id</span>
+                                                        </div>
+                                                    <span class="que-input-label"><b>QUESTION*</b></span>
+                                                    <textarea class="QuestionInput" style="padding:10px;" name="description" ng-model="flaskUsData.description" required></textarea>
+                                                    <div ng-show="flaskus_form1.$submitted || flaskus_form1.description.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form1.description.$error.required" style="float: left;" class="error_msg">Please enter Description</span>
+                                                    </div>
+                                                </div>
+                                                <div align="center">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
+                                                        Send
+                                                    </button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ion-content>
+                    </div>
+                </ion-tab>
+            </ion-tabs>
+        </div>
+
+        <div ng-if="infoTypeName == 'During-Event'" class="During-Event">
+            <ion-tabs class="tabs-positive tab_bottom ">
+                <ion-tab title="VENUE MAP" ng-click="selectTab(0)">
+                    <ion-content overflow-scroll="false">
+                        <!--<div class="image_map_div " draggable="true">
+                            <img id="image" class="venueMapImage" ng-class="{ zoomedvenueMapImage: zoomMapImage==true}" on-double-tap="toggleZoomImage()" ng-src="{{venueMapImageUrl}}" />
+                        </div>-->
+                        <ion-scroll id="mapImage"
+                                    zooming="true"
+                                    direction="xy"
+                                    delegate-handle="zoom-pane"
+                                    class="zoom-pane"
+                                    min-zoom="1"
+                                    max-zoom="15"
+                                    overflow-scroll="false">
+                            <img ng-src={{venueMapImageUrl}}>
+                        </ion-scroll>
+                    </ion-content>
+                </ion-tab>
+
+                <ion-tab title="VENUE INFO" ng-click="selectTab(1)">
+                    <ion-content overflow-scroll="false" class="traffic_ion_content">
+                        <div ng-repeat="data in venueInfoDetail" class="flask_us_form">
+                            <div align="center">
+                                <div class="taffic_heading_div">
+                                    <i class="trafficDetailHeading">{{data.infoTitle}}</i>
+                                </div>
+                            </div>
+                            <div class="TrafficInfoDescDiv">
+                                <div id="venueInfo" class="" compile="data.infoDesc">
+                                </div>
+                            </div>
+                            <div ng-repeat="subdetail in data.venueInfoSubDetail">
+                                <div>
+                                    <div class="TrafficInfoDescDiv">
+                                        <div class="subDetails">
+                                            <i class="trafficDetailHeading" ng-if="subdetail.venueSubDetailTitle != ''">{{subdetail.venueSubDetailTitle}}</i>
+                                            <i class="trafficSubDetailHeading" style="font-weight:normal !important;">- {{subdetail.venueSubDetailDesc}}</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br />
+                    </ion-content>
+                </ion-tab>
+                <!--<ion-tab title="BARS/FOOD" ng-click="selectTab(2)" class="tabs-item-hide" style="display:none;">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 2" style="display:none;"  data-tap-disabled="true">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="05">
+        </ui-gmap-marker>
+                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick" control="barGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>-->
+                <ion-tab title="FLASK US" ng-click="selectTab(3)">
+                    <div class="traffic_div" ng-if="selectedIndex == 3">
+                        <ion-content overflow-scroll="false" class="traffic_ion_content">
+                            <div>
+                                <div class="flask_us_div">
+                                    <div>
+                                        <div delegate-handle="Flask-Detail" show-pager='false'>
+                                            <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details" style="display: none;">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
+                                                    <div ng-if="flaskUsDetail.imageUrl && flaskUsDetail.length !=0">
+                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}} style="width:100% !important; height: auto !important;">
+                                                    </div>
+                                                    <div class="form-group flask_us_form">
+                                                        <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                    </div>
+                                                    <div class="col-70 flask_us_detail_title" id="Descriptions">
+                                                        <div class="ion-star"></div>
+                                                        {{flaskUsDetail.infoDesc}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="eventHeading2 flaskEventHeading2">
+                                                    <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
+                                                </div>
+                                                <div class="flaskUsQuestionDiv">
+                                                <form name="flaskus_form2" novalidate  ng-submit="flaskus_form2.$valid && toggleMsgDiv(flaskUsData)">
+                                                <div align="center">
+                                                    <span class="que-input-label"><b>NAME*</b></span>
+                                                    <input type="text" style="padding:10px;" name="subject" ng-model="flaskUsData.subject" class="QuestionInput" required>
+                                                    <div ng-show="flaskus_form2.$submitted || flaskus_form2.subject.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form2.subject.$error.required" style="float: left;" class="error_msg">Please enter Name</span>
+                                                    </div>
+                                                    <span class="que-input-label"><b>EMAIL*</b></span>
+                                                    <input type="email" style="padding:10px;" name="fromMail" ng-model="flaskUsData.fromMail" class="QuestionInput" required>
+                                                        <div ng-show="flaskus_form2.$submitted || flaskus_form2.fromMail.$touched"     class="ng-hide que-input-label">
+                                                        <span ng-show="flaskus_form2.fromMail.$error.required || flaskus_form2.fromMail.$error.email" style="float: left;" class="error_msg">Please enter valid email Id</span>
+                                                        </div>
+                                                    <span class="que-input-label"><b>QUESTION*</b></span>
+                                                    <textarea class="QuestionInput" style="padding:10px;" name="description" ng-model="flaskUsData.description" required></textarea>
+                                                    <div ng-show="flaskus_form2.$submitted || flaskus_form2.description.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form2.description.$error.required" style="float: left;" class="error_msg">Please enter Description</span>
+                                                    </div>
+                                                </div>
+                                                <div align="center">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
+                                                        Send
+                                                    </button>
+                                                </div>
+                                                </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ion-content>
+                    </div>
+                </ion-tab>
+            </ion-tabs>
+        </div>
+        <div ng-if="infoTypeName == 'Post-Event'" class="Post-Event">
+            <ion-tabs class="tabs-positive tab_bottom">
+                <ion-tab title="BARS/FOOD" ng-click="selectTab(0)">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 0" data-tap-disabled="true">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=02>
+                            </ui-gmap-marker>
+                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'"    options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'"    icon="'icon'" options="barGoogleMarkerOptions" click="onClick" control="barGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="Nightlife" ng-click="selectTab(1)" events="map.events">
+                    <div id="nightLifeTab" class="tab_div" ng-if="selectedIndex == 1" data-tap-disabled="true">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniFlaskButton" ng-click="selectNightLifeFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniGoogleButton" ng-click="selectNightLifeGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=03>
+                            </ui-gmap-marker>
+                            <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'"   options="nightLifeFlaskMarkerOptions" click="onClick"
+                                             control="nightLifeFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="nightLifesGoogleMarkers"   coords="'self'" icon="'icon'" options="nightLifeGoogleMarkerOptions" click="onClick"
+                                             control="nightLifeGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="HOTELS" ng-click="selectTab(2)">
+                    <div id="hoteltab" class="tab_div" ng-if="selectedIndex == 2" data-tap-disabled="true">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniFlaskButton" ng-click="selectHotelFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniGoogleButton" ng-click="selectHotelGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=04>
+                            </ui-gmap-marker>
+                            <ui-gmap-markers models="hotelMarkers" coords="'self'" icon="'icon'"    options="hotelFlaskMarkerOptions" click="onClick" control="hotelFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="hotelGoogleMarkers" coords="'self'"    icon="'icon'" options="hotelGoogleMarkerOptions" click="onClick"
+                                             control="hotelGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="GETTING HOME" ng-click="selectTab(3)">
+                    <div class="traffic_div" ng-if="selectedIndex == 3">
+                        <ion-content overflow-scroll="false" class="night_life_ion_content">
+                            <div class="list">
+                                <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail" ng-if="gettingHomeDetail.phoneNumber==undefined" ng-click="openApp(gettingHomeDetail)">
+                                    <h2 class="tickets">{{gettingHomeDetail.infoTitle | uppercase}}</h2>
+                                    <p class="item-tickets">{{gettingHomeDetail.phone}}</p>
+                                    <i class="icon ion-chevron-right ticket-icon"></i>
+                                </a>
+
+                            </div>
+                        </ion-content>
+                    </div>
+                </ion-tab>
+                <ion-tab title="FLASK US" ng-click="selectTab(4)">
+                    <div class="traffic_div" ng-if="selectedIndex == 4">
+                        <ion-content overflow-scroll="false" class="traffic_ion_content">
+                            <div>
+                                <div class="flask_us_div">
+                                    <div>
+                                        <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
+                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details" style="display: none;">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
+                                                    <div ng-if="flaskUsDetail.imageUrl && flaskUsDetail.length !=0">
+                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}} style="width:100% !important; height: auto !important;">
+                                                    </div>
+                                                    <div class="form-group flask_us_form">
+                                                        <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                    </div>
+                                                    <div class="col-70 flask_us_detail_title" id="Descriptions">
+                                                        <div class="ion-star"></div>
+                                                        {{flaskUsDetail.infoDesc}}
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    <div>
+                                        <div class="eventHeading2 flaskEventHeading2">
+                                            <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
+                                        </div>
+                                            <div class="flaskUsQuestionDiv">
+                                                <form name="flaskus_form3" novalidate  ng-submit="flaskus_form3.$valid && toggleMsgDiv(flaskUsData)">
+                                                <div align="center">
+                                                    <span class="que-input-label"><b>NAME*</b></span>
+                                                    <input type="text" style="padding:10px;" name="subject" ng-model="flaskUsData.subject" class="QuestionInput" required>
+                                                    <div ng-show="flaskus_form3.$submitted || flaskus_form3.subject.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form3.subject.$error.required" style="float: left;" class="error_msg">Please enter Name</span>
+                                                    </div>
+                                                    <span class="que-input-label"><b>EMAIL*</b></span>
+                                                    <input type="email" style="padding:10px;" name="fromMail" ng-model="flaskUsData.fromMail" class="QuestionInput" required>
+                                                    <div ng-show="flaskus_form3.$submitted || flaskus_form3.fromMail.$touched"     class="ng-hide que-input-label">
+                                                        <span ng-show="flaskus_form3.fromMail.$error.required || flaskus_form3.fromMail.$error.email" style="float: left;" class="error_msg">Please enter valid email</span>
+                                                    </div>
+                                                    <span class="que-input-label"><b>QUESTION*</b></span>
+                                                    <textarea class="QuestionInput" name="description" ng-model="flaskUsData.description" style="padding:10px;" required></textarea>
+                                                    <div ng-show="flaskus_form3.$submitted || flaskus_form3.description.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form3.description.$error.required" style="float: left;" class="error_msg">Please enter Description</span>
+                                                    </div>
+                                                </div>
+                                                <div align="center">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
+                                                        Send
+                                                    </button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                    </div>
+                                    </ion-slide>
+                                    </ion-slide-box>
+                                </div>
+                            </div>
+                    </div>
+    </ion-content>
+    </div>
+    </ion-tab>
+    </ion-tabs>
+    </div>
+    </ion-content>
+    <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
+        <div ng-include="'templates/advertisement.html'" class="footer-img"></div>
+    </ion-footer-bar>
+</ion-view>

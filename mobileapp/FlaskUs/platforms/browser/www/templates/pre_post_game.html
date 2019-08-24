@@ -1,0 +1,75 @@
+﻿<ion-view cache-view="true" class="customFooter">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-title>
+            <a href="#/app/events"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
+        </ion-nav-title>
+    </ion-nav-bar>
+    <div class="bar bar-subheader" >  
+        <div class="row">
+            <div class="eventHeading2">
+                <span class="overlineStyle">{{currEventName}}</span>
+            </div>
+        </div>    
+    </div>
+    <ion-content class="has-footer has-header has-subheader">
+        <div class="row mainRow" >
+            <div class="sideImagePanel">
+                <img src="img/pre.png" class="sidepanel"/>
+                <div class="left">
+                    <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide1')"></button>
+                </div>
+                <div class="right">
+                    <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>                    
+                </div>
+                <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
+                    <ion-slide ng-repeat="pre in Pre_Game" style="width:100%;">
+                        <img ng-src="img/resources/{{getBackgroundImage(pre, 'pre')}}" class="sliderImages"  ng-click="venueDataRecieved==true && preEvent(pre)"/>
+                        <img ng-src="img/flask_icons/{{getImageLabel(pre,'pre')}}" class="slider_svg_img" ng-click="venueDataRecieved==true && preEvent(pre)" />
+                    </ion-slide>                    
+                </ion-slide-box>                
+            </div>
+        </div>
+        <div class="row mainRow" >
+            <div class="sideImagePanel">
+                <img src="img/at.png" class="sidepanel"/>
+                <div class="left">
+                    <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide2')"></button>
+                </div>
+                <div class="right">
+                    <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide2')"></button>
+                </div>
+                <ion-slide-box delegate-handle="slide2" show-pager='false' does-continue="true">
+                    <ion-slide ng-repeat="during in During_Game" style="width:100%;">
+                        <img ng-src="img/resources/{{getBackgroundImage(during,'during')}}" class="sliderImages" ng-click="venueDataRecieved==true && atEvent(during)"/>
+                        <img ng-src="img/flask_icons/{{getImageLabel(during, 'during')}}" class="slider_svg_img" ng-click="venueDataRecieved==true && atEvent(during)" />
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+        </div>
+        <div class="row mainRow">
+            <div class="sideImagePanel">
+                <img src="img/post.png" class="sidepanel"/>
+                <div class="left">
+                    <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide3')"></button>
+                </div>
+                <div class="right">
+                    <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide3')"></button>
+                </div>
+                <ion-slide-box delegate-handle="slide3" show-pager='false' does-continue="true">
+                    <ion-slide ng-repeat="post in Post_Game" style="width:100%;">
+                        <img ng-src="img/resources/{{getBackgroundImage(post,'post')}}" class="sliderImages"  ng-click="venueDataRecieved==true && postEvent(post)"/>
+                        <img ng-src="img/flask_icons/{{getImageLabel(post, 'post')}}" class="slider_svg_img" ng-click="venueDataRecieved==true && postEvent(post)" />
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+        </div>   
+   </ion-content>
+    <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
+        <div ng-include="'templates/advertisement.html'"class="footer-img"ng-if="showAddv==true"></div>
+    </ion-footer-bar>
+</ion-view>

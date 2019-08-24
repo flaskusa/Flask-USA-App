@@ -1,0 +1,3952 @@
+﻿/*Font*/
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next-Bold';
+	src: url('../lib/ionic/fonts/avenir-next-bold.woff') format('woff');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: 'Avenir Next Ultra';
+	src: url('../lib/ionic/fonts/AvenirNext-UltraLight.woff2') format('woff2');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-Regular_1.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-BoldItalic.woff2') format('woff2');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-Italic.woff2') format('woff2');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next Ultra';
+	src: url('../lib/ionic/fonts/AvenirNext-UltraLightItalic.woff2') format('woff2');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next Demi';
+	src: url('../lib/ionic/fonts/AvenirNext-DemiBold.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-Heavy.woff2') format('woff2');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-HeavyItalic.woff2') format('woff2');
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next Demi';
+	src: url('../lib/ionic/fonts/AvenirNext-DemiBoldItalic.woff2') format('woff2');
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-Bold.woff2') format('woff2');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('../lib/ionic/fonts/AvenirNext-MediumItalic.woff2') format('woff2');
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'AGENCYR';
+	src: url('../lib/ionic/fonts/AGENCYR.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Tungsten-Bold';
+	src: url('../lib/ionic/fonts/Tungsten-Bold.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Avenir Next';
+}
+
+html, body{font-family: 'Avenir Next';}
+
+button{font-family: 'Avenir Next' !important;}
+
+button i{font-family: 'Avenir Next' !important;}
+
+.button{font-family: 'Avenir Next' !important;}
+
+.item-input input, .item-input textarea{font-family: 'Avenir Next';}
+
+div.ng-binding{    
+    font-family: 'Avenir Next';
+    font-weight: 600;
+}
+
+.tabs a span{font-family: 'AGENCYR';
+             font-size: 15px;
+}
+
+.button{
+    color:#F89734 !important;
+}
+
+.fill-height-or-more {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  > div {
+    // these are flex items
+    
+    // flex: 1; same as:
+    // flex-grow: 1;
+    // flex-shrink: 1;
+    // flex-basis: auto;
+    // flex: 1 1 auto;
+    flex: 1;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > div {
+      // also flex items 
+    }
+  }
+}
+
+.scroll{
+    height: 100% !important;
+}
+
+.mainRow{
+    height:33.33%;
+    padding:0px;
+}
+.sideImagePanel{
+    width:100%;height:100%;
+}
+
+.myEvent{
+          background-image:url("../img/flask_images/MY_EVENTS.jpg");
+      background-size:100%;
+}
+.myTailgate{
+          background-image:url("../img/flask_images/MY_TAILGATE.jpg");
+      background-size:100%;
+}
+
+.edit_tailgate:before{
+    font-size:22px !important;
+}
+
+.list.add_my_tailgate{
+    padding-top:40px !important;
+}
+
+.myFrnds{
+     background-image:url("../img/flask_images/MY_FRIENDS.jpg");
+      background-size:100%;
+}
+.row.mainRow.myFrnds {
+    margin-top: -1px;
+}
+.sliderImages{
+    width: 100%;display:block;height: 100%
+}
+
+.slider_svg_img{
+    margin-top: -25%;
+    height: 37%;
+    margin-left: -11%;
+    margin-right: -40%;
+    width: 71%;
+}
+
+.sidepanel{
+    float:left;
+    float: left;
+    width: 27px;
+    height: 100%;
+}
+
+.row.mainRow {
+    margin-top: -1px;
+}
+@media only screen and (min-width:50px){
+    a.post-content{
+        height: 31px;
+        background-color: rgba(0, 0, 0, 0.63);
+        color: white;
+        margin-top: 14px;
+        text-decoration:none;
+        padding-top: 6px;
+        font-size:100%;
+        font-weight:600;
+        width:155px;
+    }
+    .platform-android .col-90 {
+        font-size: 13px;
+    }
+
+    .platform-android img.list-thumbnail.listImages {
+        max-height: 100%;
+    }
+    
+}
+
+.some-area {
+  > div {
+    padding: 4rem;
+    &:nth-child(1) {
+      background-image:url("/img/flask_images/MY_EVENTS.jpg");
+      background-size:100%;
+    }
+    &:nth-child(2) {
+      background-image:url("/img/flask_images/MY_TAILGATE.jpg");
+      background-size:100%;
+    }
+    &:nth-child(3) {
+      background-image:url("/img/flask_images/MY_FRIENDS.jpg");
+      background-size:100%;
+    }
+    h1, h2 {
+      margin: 0 0 0.2rem 0;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}
+
+i.icon.ion-star{padding-left:2%;}
+//added style.css
+
+/* Empty. Add your own CSS if you like */
+/*start css for splash overlay*/
+#custom-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: white;
+}
+
+#custom-overlay img {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+  -webkit-animation: rotating-function 5.25s linear infinite;
+  -moz-animation: rotating-function 5.25s linear infinite;
+  -o-animation: rotating-function 5.25s linear infinite;
+  animation: rotating-function 5.25s linear infinite;
+}
+/*end css for splash overlay*/
+
+/* Empty. Add your own CSS if you like */
+.badge.badge-assertive {
+    background-color: #0f0f0f;
+    color: #fff;
+}
+.badge {
+    border-radius: 6px;
+}
+
+ion-item.item {
+    color: darkorange;
+}
+.my-side-menu{
+ background: #000;
+}
+.my-list-item{
+ background: #000 !important;
+ border:white !important;
+}
+
+.ion-plus-circled:before
+{
+    color: #000;
+    font-size: x-large;
+}
+
+label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
+	color: #F89734;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: larger;
+    width: 107%;
+    margin-left: -11px;
+    border-color: black;
+}
+
+.checkbox input:before, .checkbox .checkbox-icon:before{
+    border-color:black !important;
+    border-width:1px !important;
+}
+/* Empty. Add your own CSS if you like */
+
+/*Login page*/
+
+
+.form_div{height:100%;
+          width:100%;
+}
+
+.loginpane{height:100%;}
+
+@media only screen and (min-width: 30.063em){
+    .loginpane {
+    margin: 0 auto;
+    }
+}
+
+.loginpane_header {
+    background: rgba(225,225,225,0.95);
+    padding: 1em 0;
+    text-align: center;
+    height:132.19px;
+    width:100%;
+}
+
+.loginpane_header img{content:url(../img/FlaskRed.png);zoom:0.3;}
+
+img.cq-dd-image{
+    height:100%;
+    margin-top:5px;
+}
+
+.loginpane_body {
+      margin-top:17%;
+}
+
+.div_list{padding-left:6%;}
+
+input.input_box{width:90%;
+           border:solid 1px #F2F1F0;
+           border-radius:5px;
+           font-family:'Avenir Next';
+}
+
+.portlet-login .form fieldset {
+    border-width: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.aui body {
+    background-color: #fff;
+    font: normal 14px/1 'Avenir Next',Helvetica,sans-serif;
+}
+
+button.button.button-block.button-positive.sign_in_button{
+    width:90%;
+    color:darkorange;
+}
+a.button.button-block.button-positive.sign_in_button{
+    width:90%;
+    padding-top:15px;
+    text-align:center;
+    color:darkorange;
+}
+
+.button{
+    background-image:none;
+    background:black !important;
+}
+
+.aui label {
+    font-size: 14px;
+}
+
+.required {
+    font-size: 12px;
+    color: chocolate;
+}
+
+.portlet-login .form .button-holder, .portlet-login .form .form-column {
+    margin-bottom: 10px;
+}
+
+.aui .checkbox {
+    min-height: 20px;
+    padding-left: 20px;
+}
+
+button.button.button-block.button-positive.taglib-text{
+	color:white;
+	width:40%;
+}
+
+@media only screen and (min-width: 167px){
+    .add_tailgate_profile {
+         margin-left: 26%;
+    }
+}
+
+
+.navigation{	 
+		text-align: center;
+        height:22%;
+        text-align: center;
+        width:100%;
+        margin-bottom:5% !important;
+}
+span.taglib-text{
+    font-size:16px !important;
+    color:#F28604 !important;
+}
+
+a.taglib-icon{
+    text-decoration:none;
+}
+
+/*CSS for checkboxes start*/
+
+.checkbox input:after, .checkbox-icon:after {
+    -webkit-transition: opacity 0.05s ease-in-out;
+    transition: opacity 0.05s ease-in-out;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 33%;
+    left: 25%;
+    display: table;
+    width: 14px;
+    height: 6px;
+    border: 1px solid orange;
+    border-top: 0;
+    border-right: 0;
+    content: ' ';
+    opacity: 0;
+}
+
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+    background: black;
+    border-color: black;
+}
+
+/*CSS for checkboxes end*/
+
+/*For wizard */
+.slider {
+  height: 100%;
+}
+.slider-slide {
+  color: #000;
+  background-color: #fff;
+  font-family: 'Avenir Next'; 
+  font-weight: 300;
+}
+
+img.slide-image{    position: relative;
+    height: 100%;
+    }
+
+#logo {
+  margin: 30px 0px;
+}
+
+#list {
+  width: 170px;
+  margin: 30px auto;
+  font-size: 20px;
+}
+#list ol {
+  margin-top: 30px;
+}
+#list ol li {
+  text-align: left;
+  list-style: decimal;
+  margin: 10px 0px;
+}
+
+.button.ng-hide{
+  display:none;
+}
+
+/*Registration Page*/
+.registerpane_body{height:100%;background:rgba(225,225,225,0.7);}
+
+ion-content{background:rgba(225,225,225,0.2);}
+
+
+
+.item.item-input{background:rgba(225,225,225,0);}
+
+span.error_msg{color:red;}
+
+.ion:before{padding-right:10px;}
+/*css form date column input list*/
+.dateCol{
+    text-transform: uppercase;
+    font-size: 11px !important;
+    margin-top: -4px;
+    margin-left: 0%;
+}
+.timeVenuCol{
+    text-transform: uppercase;
+    font-size: 11px !important;
+    margin-top: -6px;
+    margin-left: 5px !important;
+    font-weight: normal !important;
+}
+
+.cityVenuCol{
+    font-weight: normal !important;
+    text-transform: uppercase;
+    font-size: 11px !important;
+    margin-top: -6px;
+    margin-left: 5px !important;
+}
+
+.arrowIcon{
+    right: -4px !important;
+    font-size: 20px !important;
+}
+.eventNameCol{
+    font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 14px !important;
+    margin-left: 1% !important;
+    margin-right: -10px !important;
+    width: 100%;
+}
+
+.eventNameCol1{
+    font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 14px !important;
+    margin-left: 6% !important;
+    margin-right: -10px !important;
+    width: 94%;
+}
+
+span.error_msg{color:red;font-size:12px;}
+
+.eventHeading{
+    text-align:center; 
+    padding-top: 20px; 
+    margin-bottom: 10px;
+    font-size: 18px !important;
+}
+
+.eventHeading2 {
+    text-align: center;
+    padding-top: 0px;
+    margin-bottom: 5px;
+    text-transform:uppercase;
+    width: 100%;
+}
+.subHeaderStyle{
+    padding-left: 10px;
+    color: #f89734;
+    font-weight: 700;
+    font-size: larger;
+    margin-top: 2px;
+    vertical-align: super;
+}
+.subheaderLinkStyle{
+    color: inherit;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    padding-top: 7px;
+}
+.subHeaderHeightStyle{
+    height:57px;
+}
+.eventheadeingStyleIonContent{
+        padding-top: 15px !important;
+}
+.subheaderImageIcon{
+    margin-bottom: 3px;
+}
+.ionContentbelowSubheader{
+    top: 100px;
+}
+.platform-android .eventHeading2{
+    text-align: center;
+    padding-top: 0px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    width: 100%;
+}
+.platform-android .friendlistInMessages{
+    margin-top:40px;
+}
+
+.trafficHeading {
+    text-align: center;
+    padding-top: 0px;
+    margin-bottom: 5px;
+    font-weight:bold;
+}
+
+#traffic ul {
+    list-style:  url("../img/flask_icons/star.svg");
+}
+
+/*Header Image*/
+.header-img{
+    margin-bottom: -11px;
+    height:35px;
+}
+
+ion-header-bar.bar-dark.bar.bar-header{background-color:black !important;}
+
+.searchBar {
+	color: #fff;
+	margin: 0 !important;
+	padding: 0;
+}
+.searchBar .icon {
+	font-size: 27px;
+	line-height: 1.2;
+	padding-right: 6px;
+	padding-left: 6px;
+}
+.searchBar .searchTxt {
+	border-bottom: 1px solid #fff;
+	left: 55px;
+	width: calc(100% - 100px);
+	position: fixed;
+	
+}
+.searchBar.numicons2 .searchTxt {
+	width: calc(100% - 135px);
+}
+.searchBar .searchTxt > .bgdiv {
+	background-color: #aaa;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0.3;
+}
+.searchBar .searchTxt > .bgtxt {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.searchBar .searchTxt input {
+	background-color: black;
+	color: white;
+	padding-left: 5px;
+	padding-right:5px;
+    width: 100%;
+}
+
+
+/*End search button*/
+
+ion-footer-bar.tabs.tabs-icon-left.bar.bar-dark.bar-footer.bar-assertive{background-color:black;}
+
+i.icon.ion-star{padding-left:4%;}
+
+button.button.button-icon.button-clear.ion-search{display:none;}
+
+.my-side-menu ul.list a {
+    background-color: black;
+    color: #fff;
+    margin-left: 17px;
+    text-decoration: none;
+}
+
+.my-side-menu .item h2 {
+    font-size: 17px;
+    font-weight: normal;
+    color: white;
+    height: 21px;
+    margin-right: 37px;
+    margin-top: 25px;
+}
+
+.my-side-menu .item h3 {
+    margin: 22px 0px 6px 0px;
+    font-size: 14px;
+    margin-top: 0;
+    color: orange;
+
+}
+
+.item.item-avatar.profile{
+    background-color: black !important;
+    height:132px;
+    border:none;
+}
+
+img.default_img{top:43px !important;}
+
+.my-side-menu ion-content {
+    background: black;
+}
+
+img.menuLogo{	
+    position: absolute !important;
+    left: 20px !important;
+    bottom: -2px !important;
+    max-width: 246px !important;
+    max-height: 117px !important;
+    width: 84% !important;
+    top: 27px !important;
+    height: 100% !important;
+    border-radius:0px !important;
+    }
+
+icon-left ion-home:before{
+    font-size:24px;
+}
+
+img.list-thumbnail.listImages {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    max-height: 60px;
+}
+
+.flaskItemImage {
+    width: 100%;
+    height: 100%;
+    max-height: 60px;
+    max-width:  60px;
+    vertical-align: middle;
+}
+
+img.list-thumbnail.listImages1 {
+    position: absolute;
+    left: 0px;
+    max-width: 55px;
+    max-height: 60px;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0px !important;
+    margin-top: -5px;
+}
+
+div.no-padding{padding:0px !important;}
+
+div .col.col-15{bottom:0px !important;}
+
+div.menuDiv{padding-bottom:10px;}
+
+.fill-height-or-more1 {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  > div {
+    // these are flex items
+    
+    // flex: 1; same as:
+    // flex-grow: 1;
+    // flex-shrink: 1;
+    // flex-basis: auto;
+    // flex: 1 1 auto;
+    flex: 1;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > div {
+      // also flex items 
+    }
+  }
+}
+
+.some-area1 {
+  > div {
+    /*padding: 1rem;*/
+  }
+}
+
+ .eventSidePanel{
+    height: 100%;
+    width: 25px;
+    margin-top: inherit;
+    margin-bottom: auto;
+    float: left;
+  }
+
+ .tailgateEventNameCol{
+    font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 14px !important;
+    margin-left: -17px !important;
+ }
+
+ .tailgateDateCol{ 
+     text-transform: uppercase; 
+     font-size: 13px !important;
+     margin-top: -4px;
+     margin-left: -19px;
+ }
+
+ .tailgateEventList{
+     text-align: center;
+    padding: 8px 39px 0px 57px;
+    min-height: 61px !important;
+    border-color: black;
+    padding-top: 16px;
+ }
+
+.arrowIcon{
+    right: 4px !important;
+}
+
+.eventList{
+    text-align: center;
+    padding: 8px 39px 0px 57px;
+    min-height: 61px !important;
+    border-color: black;
+}
+.venueList {
+    text-align: center;
+    padding: 8px 59px 0px 57px;
+    min-height: 61px !important;
+    border-color: black;
+}
+.eventHeading{
+    text-align:center; 
+    padding-top: 20px; 
+    margin-bottom: 20px;
+}
+.overMainLineStyle{
+    border-top: 4px solid #F89734;
+    font-weight: bold;
+    font-size:25px;
+}
+
+.overlineStyle{
+    border-top: 2px solid #F89734;
+    font-weight: bold;
+    text-decoration: overline #F89734;
+}
+
+span.ion-chevron-down{
+    top:16px !important;
+}
+
+span.ion-chevron-right{
+    top:16px !important;
+}
+
+ /*friend details page start*/
+ p.friend{font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    color: darkorange;}
+
+.list.card.friend-info{box-shadow:none;background-color:transparent;} 
+
+.item.item-body.item_friend_details{background-color:transparent;}
+.loginpane_footer {
+    background-image: url("../img/ad.png");
+    width: 100%;
+}
+
+ img.footer-img{  
+     height: 60px;width: 100%
+ }
+
+ .friend-image{width:80%;height:80%;padding-left: 20%;}
+
+ .requester_name{
+    text-transform: uppercase;
+    color: #F89734;
+    font-weight: 700;
+    margin-top: 17px !important;
+    margin-right: -14px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 78%;
+    width: 100%;
+    white-space: nowrap;
+}
+
+ /*friend details page end*/
+
+ /*tickets start*/
+ h3.eventHeading{font-weight:bold;}
+
+ h2.tickets{font-weight: bold;
+    font-size: 27px;
+    text-align: center;
+    margin-top:0%;
+    padding-left:8%;
+}
+
+.item-tickets{text-align: center;
+    font-size: 13px;
+    color: darkorange !important;
+    padding-left:8%;
+}
+
+a.item.item-avtar.item-icon-right.item-ticket{
+    border-color:black;
+}
+ /*tickets end*/
+.slider-slide {
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  font-weight: 300;
+}
+
+/*login popup*/
+
+.login_error{color:red;font-size:18px;font-weight:bold;background:rgba(225,225,225,0.7);}
+/*login popup end*/
+
+select.flaskSelect{
+   -webkit-appearance: button;
+   -webkit-border-radius: 2px;
+   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+   -webkit-padding-end: 5px;
+   -webkit-padding-start: 2px;
+   -webkit-user-select: none;
+   background-image: url(../img/flask_icons/circle_arrow_down.svg);
+   background-position: 99% center;
+   background-repeat: no-repeat;
+   border: 1px solid #AAA;
+   color: #555;
+   font-size: inherit;
+   overflow: hidden;
+   padding: 5px 5px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   min-width: 200px;
+}
+/*css for search box*/
+input.searchboxArea {
+       width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #f7941e;
+    height: 35px;
+    padding-bottom: 10px;
+	padding-top:10px;
+}
+select.searchboxArea {
+    width: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    color: white;
+    height: 45px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: solid #EFF0F1 1px;
+    border-bottom: solid #EFF0F1 1px;
+}
+div.searchrow {
+    padding: 0px;
+}
+
+.BgCol{
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color: #f7941e;
+	display: block;
+    height:140px;
+}
+
+.BgCol1{
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color:#464444;
+	display: block;
+}
+
+button.button.button-clear.button_search{      
+    color: darkorange;
+    border-radius: 3px;
+    font-size: 15px;
+    width: 90%;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-left:5%;
+    vertical-align: middle;
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+}
+/*css for search box*/
+/* Prepost game */
+.left, .right{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: absolute;
+  height: 35%;
+  z-index: 100;
+  width: 44px;
+  background-color: rgba(0,0,0,0)
+}
+
+.left{
+
+  left: 20px;
+}
+
+.right{
+  right: 0;
+}
+
+.button.button-positive.button-clear{    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: Orange;}
+
+/*Css for all flask icons and add text feilds and error text*/
+.ErrorColor{
+    color: red;
+    text-align: center;
+}
+.FlaskionIcons{
+    width: 21px;
+    height: 24px;
+}
+p.addText{
+    padding-left: 10px;
+    color: #f89734;
+    font-weight: 700;
+    font-size: larger;
+    margin-top: 2px;
+}
+/*End of Css for all flask icons and add text feilds and error text*/
+.BgCol2{
+    background-color: black;
+    border-color: #ffffff;
+    margin: 0px;
+    padding: 4px;
+}
+.span_icon img {
+    width:21px;
+    height:20px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-right: -28px;
+}
+
+.span_icon_tailgate img{
+    width:21px;
+    height:20px;
+    margin-top: 5px !important;
+    margin-right: -28px;
+}
+
+.eventNameCol_tailgate{
+    font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 14px !important;
+    margin: 4px 0px 0px 10px !important;
+    width: 100%;
+}
+
+.dateCol_tailgate{
+    text-transform: uppercase;
+    font-size: 11px !important;
+    margin: 0px 0px 0px 10px;
+    color:darkorange !important;
+}
+
+span.badge.span_icon{
+    right:14px ;
+}
+
+span.badge.span_icon_supplies{
+    top:14px;
+    width:21px;
+    height:20px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-right: -27px !important;
+}
+
+.successColor{
+        color: green;
+}
+
+/*My event list*/
+a.item-content {
+    padding: 0px !important;
+    text-align: center;
+}
+ion-item.myList.item.item-complex.item-right-editable {
+    border-color: black;
+}
+/*end my evnet list*/
+
+/*user-navigation-menu*/
+a.tab-item.bottom_tabs{
+    font-weight: bold;
+    font-size: 11px !important;
+    }
+	
+input.loginInputs{
+    padding-left: 10px;
+    width: 95%;
+    font-family:'Avenir Next';
+}
+
+.col.col-70.event_content{
+    padding-left: 8%;
+    width: 93%;
+}
+
+.col.col-70.event_content1{
+    padding-left: 5%;
+    width: 86%;
+}
+
+/*Prepost slider*/
+.slider_arrow {
+    transition: opacity 0.1s;
+    padding: 0 6px;
+    min-width: 4px;
+    border-radius: 21px;
+    border-color: transparent;
+    text-shadow: 2px 0px 5px black;
+    background: #656565;
+    /* background: none; */
+    opacity: 0.9;
+}
+
+.slider_arrow:before{font-size:19px !important;}
+/*End Prepost slider*/
+
+.icon.icon_events img{width:21px;height:20px;padding-left:10%;}
+
+/*Flask Spinner Class*/
+.spinner.flask-spinner {
+    stroke: #f89734;
+    fill: #f89734;
+}
+/*for reducing padding for floating text boxes*/
+.item.item-input.item-floating-label {
+    padding: 0px 0 0px 16px;
+}
+
+.bar.bar-header.bar-positive.black-header {
+  background: black;
+  color: darkorange;
+  border-color: darkorange
+}
+.bar.black-header .title {
+  color: darkorange;
+}
+
+.black-header .button.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: orange;
+    font-size: 17px;
+}
+
+button.button.button-clear.mini-button {
+    color: darkorange;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 4px;
+    vertical-align: middle;
+    min-height: 27px;
+    min-width: 32%;
+    font-weight: normal;
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+}
+.item .badge.ext-right {
+    right: 4px;
+}
+
+ input.friendSearch {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: transparent;
+    color: black;
+    height: 35px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 1px solid #f7941e;
+    border-radius: 4px;
+}
+
+  button.button.button-block.button-positive.friend{
+    width: 51%;
+    color: darkorange;
+}
+
+  .srchBgCol {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: #f7941e;
+  display: block;
+  height: 95px; }
+  .strip{
+  width: 100%;
+  height: 45px;
+  background: #000000
+}
+.stripPadding{
+  padding-top:13px;
+  text-align: center;
+}
+.textStyle{
+  color: #ffffff;
+  font-size: 17px;
+}
+.iconAlignment{
+  cursor: pointer;
+  float: right;
+}
+.deleteIcon{
+  float: right;
+  padding-top: 5px;
+  padding-right:50px;
+}
+.editIcon{
+  float: right;
+  padding-top: 5px;
+  padding-right:15px;
+}
+
+/*Flask Tabs*/
+.tab-nav.tabs{
+    background-color: #000000 !important;
+}
+/*Flask tabs for mytailgate details*/
+.divImage{
+    width: 100%;
+    height: 28%;
+}
+.myTailgatetopImg {
+  height: auto;
+  max-height: 240px;
+  display: block;
+  margin-left: 0px;
+  margin-right: 0px; 
+  width: 100%;
+  margin-top:-1px; 
+
+  }
+
+.eventDiv{
+    text-align:center;
+}
+.mytailgate_Heading {
+    text-align: center;
+    padding-top: 14px;
+    font-size: 18px;
+}
+.tab1{
+    border: solid 1px;
+}
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+a.tab-item {
+    font-size: 11px;
+}
+.tailgateInfoborder {
+    border-bottom: solid 1px;
+}
+.tailgateDescFont{
+    font-weight: bold;
+    color: #f89735;
+    padding-right: 4px;
+}
+
+.tailgate_slider{
+    padding: 0px;
+}
+
+.button:hover {
+  text-decoration: none; }
+
+/*tailgate event detaila*/
+
+.thumb-size{
+    width:147%;
+    height:101% !important;
+    border-right:solid white 2px;
+}
+
+.tailgate_thumb{
+    width:100%;
+    height:101px !important;
+    overflow: visible !important;
+   }
+
+button.button.button-block.button-positive.invite_friend{
+    width: 34%;
+    color: darkorange;
+    min-height: 30%;
+    margin-left: 71%;
+    margin-top: -49px;
+    border-radius: 6px !important;
+    font-size:14px !important;
+}
+
+button.button.button-block.button-positive.invite_friend i{
+    margin-left:-22px;
+}
+
+.photoitem{
+    background-color:lightgray;
+    text-align:center;
+    font-weight:bold;
+    margin-top:0px;
+    float:left;
+}
+
+.photobuttontext{
+    font-size: 11px;
+}
+
+.tailgate_slider{
+    padding: 0px;
+}
+
+h2.tailgater_name{
+    font-weight: bold;
+    margin: 11px 0px 0px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 162px;
+    width: 100%;
+}
+
+@media screen and (max-width: 321px) {
+  .item-icon-left{
+    padding-left: 35px;
+  }
+}
+@media screen and (min-device-width: 400px) and (max-device-width: 450px) {
+  .item-icon-left{
+    padding-left: 80px;
+  }
+}
+.divText{
+  width: 100%;
+  height:70px;
+  font-size:larger;
+  background-color:#ffffff;
+  color: #f89735;
+  padding-top: 19px;
+  padding-left:10px;
+  padding-right: 10px;
+}
+.list-item-icon-left{
+  padding-left: 75px;
+}
+@media screen and (max-width: 321px) {
+  .list-item-icon-left{
+    padding-left: 67px;
+  }
+}
+@media screen and (min-device-width: 350px) and (max-device-width: 450px) {
+  .list-item-icon-left{
+    padding-left: 105px;
+  }
+}
+.suppliesButton {
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  width: 85px;
+  height: 34px;
+  border-radius: 8px;
+  color: darkorange;
+  border-color: white;
+  font-size: 13.5px; }
+
+
+/*Start tailgate details bottom tabs*/
+.tab_bottom a.tab-item{
+    border-right:solid white 1px !important;
+     border-right:solid white 1px !important;
+    color:white !important;
+}
+
+.tab_bottom a.tab-item.tab-item-active{
+    color:orange !important;
+    border-top:none !important;}
+/*End tailgate details bottom tabs*/
+
+/*Search icon*/
+.button.button-icon.ion-android-search:before{font-size:27px !important;}
+
+.form-left{
+    left: 0;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    -moz-box-direction: normal;
+    -moz-box-orient: horizontal;
+    -ms-flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -ms-flex-line-pack: stretch;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    position: absolute;
+    z-index: 100;
+    width: 44px;
+   }
+.form-right{
+    right:0px;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    -moz-box-direction: normal;
+    -moz-box-orient: horizontal;
+    -ms-flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -ms-flex-line-pack: stretch;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    position: absolute;
+    z-index: 100;
+    width: 44px;
+}
+
+.slider_arrow_tailgate {
+    transition: opacity 0.1s;
+    padding: 9px 20px;
+    min-width: 4px;
+    background: #656565;
+    opacity: 0.5;
+}
+.strip2{
+  width: 100%;
+  height: 35px;
+  background: #000000;
+  padding-top: 8px;
+}
+i.addText {
+  padding-left: 10px;
+  color: #f89734;
+  font-weight: 700;
+  margin-top: 2px; }
+
+.divAddIcon{
+  width: 100%;
+  background-color: #ffffff;
+  height: 50px;
+  padding-right: 17px;
+  padding-top: 9px;}
+
+
+/*Tickets*/
+.ticketNameCol{
+    font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 26px !important;
+    padding-right: 24px;
+    
+}
+
+.ticketSiteCol{
+    text-transform: uppercase;
+    font-size: 14px !important;
+    margin-top: 0px;
+    padding-right: 24px;
+}
+
+.ticketList{
+    text-align: center;
+    padding: 8px 39px 0px 57px;
+    min-height: 69px !important;
+    border-color: black;
+}
+
+i.icon.ion-chevron-right.ticket-icon{margin-right:-14px;}
+
+/*my tailgate details*/
+span.ng-binding{text-transform:uppercase;font-weight:600;}
+
+.icon.menu_icon:before{
+    font-size:24px;
+}
+
+.badge{color:white !important;}
+
+ul.list.menuContentList{padding-top:6px;}
+
+a.item.icon{    
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-left: 4px !important;
+}
+
+a.item.icon.activated{background-color:darkorange;}
+
+a.item.icon.activated:before{color:white;}
+
+
+.hide {
+    display: none;
+}
+
+.angular-google-map-container {
+  height:92%; width:100%; position:absolute; top:0; left:0;  }
+
+
+.item-select select {
+position:initial !important;    
+}
+.groupIcon {
+  max-width: 47px;
+  height:47px;
+  float: left
+}
+.friendIcon{
+  max-width: 47px;
+  height:47px;
+  float: left
+}
+.chatIcon{
+    width: 43px;
+    max-width: 65px;
+    height: 41px;
+    margin-top: -9px;
+    border-radius: 50%;
+}
+.arrowIconAlign{
+  width:21px;
+  height:23px;
+  padding-left:10%;
+  top:20px;
+  float: right
+}
+.adminText{
+  background-color: #ff8c00;
+  width:50px
+}
+.userText{
+  background-color: black;
+  width:50px
+}
+.tab-item {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: block;
+  overflow: hidden;
+  max-width: 250px;
+  height: 100%;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  opacity: 0.7; }
+
+.groupSearch {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: #f7941e;
+  display: block;
+  height: 45px; }
+  .miniGoogleButton {
+    position: relative;
+    background-image: url("../img/google-g-icon.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+    float: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;}
+
+    .miniFlaskButton {
+    position: relative;
+    background-image: url("../img/flasklogo2.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+    float: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    }
+    
+    .miniLocateButton {
+    position: relative;
+    background-image: url("../img/location-arrow.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+    float: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    }
+
+    .miniDollarButton{
+    position: relative;
+    background-image: url("../img/dollar_icon.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+    float: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    }
+
+   .map_icon_type{
+       border: 2px solid rgb(255, 255, 255);
+       border-radius: 3px;
+       box-shadow: rgba(0, 0, 0, 0.298039)0px 2px 6px;
+       cursor: pointer;
+       margin-bottom: 5px;
+       text-align: center;
+       background-color: rgb(255,255, 255);
+    }
+
+   .map_icon_type div{
+       color: rgb(25, 25, 25);
+       font-size: 16px;
+       height: 32px;
+       padding: 2px;
+   }
+
+   .tab_div{
+       height:100%;
+       width:100%;
+   }
+
+   .parking_map_div{
+       margin-right: 5px;
+       margin-top:-55% !important;
+   }
+
+   .parkingInfo{
+       vertical-align:middle;
+   }
+
+   /*traffic*/
+   .traffic_div{
+       padding:10px;
+   }
+
+   .traffic_details{
+       border-bottom: solid;
+       margin-top: 20px;
+   }
+   
+   .taffic_heading_div{
+       width:80%;
+   }
+
+   .traffic_ion_content{
+       background:white;
+   }
+
+   /*flask Us*/
+   .flask_us_div{
+       max-width: 100vw;
+   }
+
+   .flask_us_slide_buttons{
+       left:0px;
+       top:121px;
+   }
+
+   .flask_us_slide_buttons_right{
+       top:121px;
+   }
+
+   .flask_us_details{
+       width:100%;
+       padding-top:15px;
+   }
+
+   .flask_us_description{
+       width: 100%;
+       font-size:18px;
+   }
+
+   .flask_us_description b{
+       font-size:20px;
+   }
+
+   .full-image{
+       height: 100px;
+       width:252px;
+   }
+
+   .flask_us_form{
+       padding-top:20px;
+   }
+
+   .flask_us_detail_title{
+       width: 90%;
+       padding-left:85px;
+       text-align: start;
+   }
+
+   .flask_us_detail_title b{
+       font-size:16px;
+   }
+
+   .flask_us_detail_title div{
+       float:left;
+       margin-left: -24px;
+   }
+
+   .flaskEventHeading2{
+       padding-top:30px;
+   }
+
+   .flaskOverlineStyle{
+       font-size:18px;
+   }
+
+   /*Night Life*/
+   .night_life_ion_content{
+       margin-top:1px;
+   }
+     /*Plan now*/
+
+    .item.item-divider.plan_now{
+    width: 109%;
+    margin-left: -17px;
+    height: 15%;
+    margin-top: 20px;
+    color: #F89734;
+    font-size: 19px;
+    font-weight: 400 !important;
+    }
+
+    select.plan_now_user{
+    margin-left: 15%;
+    width: 173px;
+    }
+
+    div.plan_now_div{
+    margin-top: -8%;
+    margin-left: 11%;
+    }
+
+    h2.items_list{
+    color:orange;
+    text-transform:uppercase;
+    }
+
+    h2.items_user_list{
+        float:right;
+        margin-top: -21px;
+        text-transform: uppercase;
+    }
+
+    .back_button_css:before{
+        font-size:26px !important;
+        margin-left: -2px;
+    }
+
+    .acc_settings {
+    font-size: 20px !important;
+    line-height: 14px !important;
+    font-weight: 800 !important;
+    margin-top: 20px !important;
+    }
+
+    .acc_settings1{
+    font-weight: bold;
+    font-size: 17px;
+    color: orange; 
+    }
+    .platform-android .acc_settings1{
+        padding-top: 40px !important;
+    }
+    .accountSettingDob{
+        font-weight: normal;
+    } 
+    .list.acc_settings1.intrestTitle {
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    .acc_settings1 h5{
+    padding-top: 11px !important;
+    color: orange;
+    font-weight: bold;
+    font-size: 19px;
+    }
+
+    .item-select.acc_settingsCol select {
+    position:initial !important;    
+    }
+
+    .header .col.acc_settingsCol {
+    background-color:black;
+    color: white;
+    font-size: 19px;
+    margin-right:-2px;
+    }
+
+    .col.acc_settingsCol {
+      border: solid 1px grey;
+      border-bottom-style: none;
+      border-right-style: none;
+      border-bottom: solid 1px grey;
+      font-weight:normal !important;
+    }
+
+    .col.acc_settingsCol:last-child {
+      border-right: solid 1px grey;
+    }
+
+    .row:last-child .col.acc_settingsCol {
+      border-bottom: solid 1px grey;
+    }
+
+    label.item.item-icon-left.item-checkbox-right.item.item-checkbox.acc_table{
+    width: 3pc;
+    margin-left: -34px;
+    border-top: solid gray 2.5px;
+    border-left: transparent;
+    border-right: solid gray 1px;
+    border-bottom: solid gray 1px;
+    margin-bottom: 0px;
+}
+.nameText{
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: 600
+}
+.labelCheckBox{
+  left:25px;
+  float:right;
+}
+.itemAnchor{
+  text-decoration: none;
+  padding:0px;
+}
+.groupNamePadding{
+  padding-left: 28%;
+  padding-top: 4px;
+}
+.groupNameText{
+  padding-left: 10px;
+  font-size: 12px
+}
+.my-view {
+  .item-content {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    height: 70px;
+    text-align: center;
+  }
+}
+
+.friendButtonStyle{
+  width: 108px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 33px;
+  /* background-color: darkcyan; */
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  /* background-color: white; */
+  border: 1px;
+  font-weight: 400;
+}
+.requestFriendButtonStyle{
+  width: 108px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 15px;
+  disabled:true;
+  cursor: not-allowed;
+  opacity:.5;
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  border: 1px;
+  font-weight: 400;
+  border-radius:6px !important;
+}
+.addFriendButtonStyle{
+  padding-left:20px;
+  border-radius:6px !important;
+}
+.unblockButtonStyle{
+  padding-left: 30px;
+}
+.invitationText{
+  font-size: 12px;
+  padding-top: 4px;
+  font-weight: 500;
+  color:black;
+  font-family:Avenir Next !important;
+}
+.item .badge.ext-top{
+  top:21px;
+}
+
+a.item.item-full.item-icon-left.attendees{padding-top:58px;}
+.emailText {
+  color: darkorange;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  width:100%;
+  margin-left:-2px;
+}
+
+.friend_group_name{
+    padding-top:4px !important;
+}
+
+.my-groupDetail-view {
+  .item-content {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    height: 70px;
+    text-align: center;
+    padding-right: 79px;
+  }
+}
+
+.toggle input + .track{
+  border-color: #e6e6e6;
+  background-color: white;
+}
+.toggle input:checked + .track {
+
+  background-color: #ff8c00 !important;
+  border:none;
+}
+.showTextArea {
+  width: 80%;
+  height:70px;
+  border: solid .5px;
+  resize: none;
+  transition: .5s;
+  border-color: orange;
+}
+.hideTexArea{
+  height:0px;
+  width:0px;
+  transition:.5s
+}
+.hideAll{
+  display:none;
+}
+.toastDiv{
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  color:#ff8c00;
+  font-weight: 500;
+  background-color: #ffffff;
+  top:280px;
+
+}
+.hideToastDiv{
+  opacity:0;
+  transition:2s;
+}
+
+/* Message board in my_tailgate_event_details*/
+.list.list-inset.msgboard{
+    border:solid 1px;
+    margin-top: 7px;
+}
+
+.msgboard_div{
+    font-weight: 700;
+    font-size: 21px;
+}
+
+.messageList{    
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size: 14px !important;
+    margin-left: 13px !important;
+}
+
+.messageList p.message_username{
+    margin-top: -1%;
+}
+
+.messageList p.messageTxt{
+    margin-top:-4%;
+}
+
+.messageList div{
+    margin-top: -21%;
+    margin-left: 14%;
+}
+
+.messageList img{
+    width:11%;
+}
+
+.messageList p.profile_name{
+    margin-top: -1%;
+    font-size: 9px;
+    margin-left: -11px;
+    color:#F28604;
+}
+
+.text_div_message{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    max-width: 260px;
+    width: 16% !important;
+}
+
+.msg_list{
+    display:inline;
+    float:left;
+}
+
+.msg_list span{
+    top: 2px; right: 22px;
+}
+
+.msg_input{
+    display:inline;
+    float:left;
+    width: 89%;
+}
+
+.msg_input label{
+    height: 30px;
+    border: transparent;
+}
+
+.message_username{color:orange !important;}
+
+.image_list{
+    padding: 0px;
+}
+
+.supplyDeleteButton{
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  width: 50px;
+  height: 100%;
+  top:0px;
+  border-radius: 0px
+}
+.item .badge.extra-right-supply {
+  right: 2px;
+  top:0px;
+}
+
+div .extra-right-supply{
+    margin-right: 1px;
+}
+
+.supplyDeleteIcon{
+  font-size: 24px;
+  padding-top: 9px;
+  padding-left: 9px;
+}
+.paddingRadio{
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-right: 5px;
+}
+.radioButtonSize {
+  height: 17px;
+  width: 17px;
+}
+.stripAdmin {
+  padding-top: 13px;
+  height: 50px
+}
+.fontSizeStrip{
+  font-size: 18px;
+}
+
+.gm-style-iw + div {
+  display: none; }
+
+.map_marker_info{
+    max-width: none;
+    height: 35px;
+    margin-left: 11px;
+}
+
+.iw_options{
+    font-size: 21px;
+    font-weight: bold;
+    margin-left: 11px;
+    float:left;
+}
+
+.marker_info_title{
+    font-size: 21px;
+    margin-top: 5px;
+    margin-left: 14px;
+
+}
+
+
+
+#iw-container {
+  overflow: hidden;
+  height: 37px;
+  transition: height 2s;
+  opacity: 1;
+  width:100%;
+   }
+
+#iw-container .iw-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 3px;
+  background: #000000;
+  color: white;
+  border-radius: 2px 2px 0 0;
+  width: 100%;  
+  max-width: 258px; }
+
+#iw-container #iw-content {
+  text-align: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 3px;
+  background: #ffffff;
+  color: #000000;
+  position: fixed;
+  display:none;
+  width: 100%;  
+  max-width: 258px;
+  overflow: hidden;
+   }
+
+.iw-fixed-title{
+  width: 100%;
+  max-width: 257px;
+}
+td.iw-fixed-title{
+  max-width: 0px !important;
+}
+
+img.map_info_img{
+  margin-left: 17px;
+}
+
+#iw-content .padding {
+  padding: 10px; }
+
+#iw-content a {
+  text-decoration: none !important;
+  color: black;
+  margin-left:7px !important;
+}
+
+.iw-content-div{
+    margin-left:-11px !important;
+    margin-top: 10px;
+}
+
+.iw-content-icon{
+  width:25px;
+}
+#iw-container .iw-sub-title { 
+    font-size: 10px;
+    color: darkorange;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    max-width: 216px;
+    width:100%;
+    font-family: 'Avenir Next-Bold';
+    font-weight: bold;
+}
+
+.iw-sub-title1 { 
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    max-width: 160px; 
+    min-width: 0;
+    width: 100%;
+    font-family: 'Avenir Next-Bold';
+    font-weight: bold;
+}
+.rangePStyle {
+// font-size: 12px;
+ margin: 0px 0px 0px 10%;
+}
+.gm-style-iw {
+  width: 313px !important;
+  top: 20px !important; }
+
+
+.my-message-view {
+  .item-content {
+    padding-right: 6px;
+  }
+}
+.supplyEditIconPadding{
+  padding-top: 16px;
+}
+
+//css for datetime picker by nav
+.ionic_datepicker_popup .popup-body .selected_date_full {
+    background-color: #433f40 !important;
+}
+.ionic_datepicker_popup .selected_date {
+    background-color: orange !important;
+}
+
+.ionic_datepicker_popup .today {
+    border: 1px solid orange !important;
+}
+.ionic_datepicker_popup .popup-body .month_select, .ionic_datepicker_popup .popup-body .year_select {
+    border-bottom: 1px solid #433f40 !important;
+}
+.ionic_timepicker_popup .heading {
+    background-color: #4b4848 !important;
+    color:orange !important;
+}
+.ionic_timepicker_popup .button_set, .ionic_timepicker_popup .button_close{
+     color: orange !important;
+}
+.ionic_datepicker_popup .popup-body .month_select:after, .ionic_datepicker_popup .popup-body .year_select:after{
+    color: orange !important;
+}
+
+.ionic_datepicker_popup .popup-buttons button{color:orange !important;}
+
+.ionic_datepicker_popup .popup-body .selected_date_full{color:orange !important;}
+//End css for datetime picker
+
+
+/*Suppy list in plan_now page*/
+
+ion-item.item.supply_list{
+    color: darkorange;
+    text-transform: uppercase;
+    font-weight: bold;
+    }
+
+.badge.badge-supply{
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+    color: #f89734 !important;
+    font-size: 12px;
+    border-radius:12px !important;
+}
+
+button.button.button-block.button-positive.pay_now_button {
+    width: 90%;
+    color: darkorange;
+    margin-left: 5%;
+}
+
+select.plan_now{
+    background-color:transparent !important;
+}
+
+label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox{
+    color:black !important;
+}
+
+/*Disable button for edit in My tailgate section by Nav*/
+.disablebutton{
+    opacity: .4;
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.disableoption{
+    opacity: .4;
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.profilepicAvatar{
+    height: 200px !important;
+    width: inherit !important; /*For avtar in profile pic */
+}
+/*End Disable button for edit in My tailgate section*/
+.my-friend-request-view {
+  .item-content {
+    padding-top: 8px;
+    padding-bottom: 12px;
+    margin-top: -4px;
+    margin-bottom: 0px;
+    height: 60px;
+  }
+}
+.item .badge.extra-top-request {
+  top:25px;
+
+}
+.friendRequestButtonStyle {
+  width: 111px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 8px;
+  padding-bottom: 3px;
+
+  /* background-color: darkcyan; */
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  /* background-color: white; */
+  border: 1px;
+  border-radius: 8px;
+  font-weight: 400; }
+.f-nameText {
+      padding-left: 15px;
+    font-size: 15px !important;
+    font-weight: 600;
+    margin-top: 16px !important;
+    text-transform: uppercase; }
+.supplySaveButtonStyle {
+  width: 65px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 25px;
+  padding-bottom: 3px;
+
+  /* background-color: darkcyan; */
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  /* background-color: white; */
+  border: 1px;
+  border-radius: 8px;
+  font-weight: 400; }
+
+.mySupplyView{
+  .button:hover {
+    color: #ff8c00;
+  }
+}
+
+/*CSS FOR EXPANDING AND CLOSING TABS WITH ANIMATION*/
+.container {
+  border: 1px solid;
+  border-right: 1px solid ;
+}
+
+.expandcollapse-item {
+  overflow: hidden;
+  border-top:1px solid;
+}
+
+.expandcollapse-heading-collapsed {
+  cursor: pointer;
+  padding: 15px 20px;
+  position: relative;
+  z-index: 100000000;
+  color: black; 
+  background-color: white;
+  
+}
+
+.expandcollapse-item:first-of-type {
+  border-top:0px;
+}
+
+.expandcollapse-heading-collapsed p{
+  font-size: 16px;
+  font-weight: normal;
+  margin:0px;
+}
+
+.expandcollapse-heading-expanded {
+  cursor: pointer;
+  z-index: 100000000;
+  padding: 15px 20px;
+  position: relative;
+  color: black; 
+  border: 1px solid black;
+}
+
+span.show_collapsed_icon{
+    background-image:url('img/flask_icons/down.png');
+}
+
+span.show_expanded_icon{
+    background-image:url('img/flask_icons/up-arrow.png');
+}
+
+.expandcollapse-heading-expanded p{
+  font-size: 16px;
+  font-weight: bold;
+  margin:0px;
+}
+
+.expandcollapse-heading-collapsed > span,
+.expandcollapse-heading-expanded > span {
+  position:absolute;
+  top: 25px;
+  right: 15px;
+  font-size: 20px;
+  line-height: 0px;
+}
+
+span.badge.span_icon_down{
+    right: 22px !important;
+    margin-top: -15px;
+    font-size: 10px;
+    width: 10px;
+}
+
+.span_icon_down img{
+    width: 43px;
+    height: 23px;
+    padding-left: -3px;
+    padding-right: 14px;
+    margin-right: -9px;
+}
+
+.expand-collapse-content {
+ /* padding: 20px;*/
+}
+
+
+/*
+animation:*/
+
+.slideDown.ng-hide {
+  height:0;
+  transition:height 0.35s ease;
+  overflow:hidden;
+  position:relative;
+}
+
+.slideDown {
+  height:50%;
+  transition:height 0.35s ease;
+  overflow:hidden;
+  position:relative;
+}
+
+.slideDown.ng-hide-remove,
+.slideDown.ng-hide-add {
+  display:block!important;
+}
+
+.slideDown.ng-hide-add {
+  animation-name: hide;
+  -webkit-animation-name: hide;  
+
+  animation-duration: .5s; 
+  -webkit-animation-duration: .5s;
+
+  animation-timing-function: ease-in;  
+  -webkit-animation-timing-function: ease-in;  
+}
+
+.slideDown.ng-hide-remove {
+  animation-name: show;
+  -webkit-animation-name: show;  
+
+  animation-duration: .5s; 
+  -webkit-animation-duration: .5s;
+
+  animation-timing-function: ease-out;  
+  -webkit-animation-timing-function: ease-out;  
+}
+
+/*css for star icon*/
+
+img.star_icon_svg{
+    width: 56px;
+    margin-right: -24px;
+    }
+
+
+i.choose_picture{
+    margin-bottom: 10px;
+    font-size: 19px;
+    margin-left: 10px;
+}
+
+
+/*CSS FOR EXPANDING AND CLOSING TABS WITH ANIMATION*/
+.manageContentButtons {
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  width: 50px;
+  float:right;
+  height: 40px;
+  top: 0px;
+  border-radius: 0px;
+}
+.Upper_Case{
+  text-transform:uppercase
+}
+.flaskUsQuestionDiv{
+  height: 300px;
+  width: 100%;
+  transition: .5s;
+}
+.hideFlaskUsQuestionDiv{
+  height:0px;
+}
+input.QuestionInput{
+  border: solid .5px;
+  width: 254px;
+  border-radius: 8px;
+}
+textarea.QuestionInput{
+  border: solid .5px;
+  width: 254px;
+  border-radius: 8px;
+}
+.que-input-label{
+  display: table;
+  padding: 0px 3px 1px 0px;
+  width: 239px;
+  color: #444;
+  font-size: 16px;
+  left: 30px;
+}
+
+.que-input-label b{
+    font-size:12px;
+    float:left;
+}
+
+.custom-popup.popup-container .popup {
+  background-color: #666666;
+  width: 90%;
+}
+.eula-popup.popup-container{
+    background:rgba(8,8,8,0.67);
+}
+
+.eula-popup.popup-container .popup {
+    width: 96%;
+    max-height: 96%; 
+    margin-top: 20px;
+    font-family: 'Avenir Next' !important;
+    border: 1px solid black;
+}
+.eula-popup .popup-title {
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    color: orange;
+}
+.eula-popup .popup-head {
+    padding: 15px 10px;
+    border-bottom: 1px solid #080808;
+    text-align: center;
+    background: #737373;
+}
+
+.eula-popup .popup-body {
+    padding: 10px;
+    overflow: auto;
+    font-family: 'Avenir Next';
+}
+
+.eula-popup .popup-buttons {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 10px;
+    min-height: 65px;
+    background: #737373;
+    border-top: 1px solid black;
+}
+.item-checkbox .eulacheckbox {
+  right: auto !important;
+  background-color: #f9f9f9;
+}
+
+.custom-class .popup-head {
+  display: none;
+}
+.custom-class .popup-body{
+  height:220px;
+}
+.popupTitleText {
+  color: #ff8c00;
+  font-size: 16px;
+  font-weight: 600
+}
+.popupCrossIcon{
+  float:right;
+  color:#ff8c00;
+  font-weight: 600;
+  font-size: 20px;
+}
+.popupIcon{
+  font-size: 18px;
+  font-weight: 500;
+
+}
+.popupText{
+  font-size: 14px;
+  font-weight: 500;
+
+}
+.customBarPadding {
+  padding: 0px;
+  height: 55px;
+}
+
+.customFooter .has-footer {
+  bottom: 55px; }
+
+.supplyAnimation{
+  height: 100%;
+  overflow: hidden;
+  transition: 1s;
+}
+.hideSupplyItem{
+  height: 0px;
+}
+
+.add_profile_div{
+    width: 135px;
+    height: 131px;
+    border-radius: 79px;
+    margin-left: 30%;
+}
+
+.add_profile_img{
+    width: 135px !important;
+    height: 131px !important;
+}
+
+/*CSS for remember me and Enable touch on login page*/
+.remember div i.checkbox-icon{
+    margin-left: -54%;
+    width: 23px !important;
+    height: 23px !important;
+    top: 3px;
+}
+.marginLeftSupplyText{
+  margin-left:40px;
+}
+.paddingTOpSupply{
+  margin-top: 1px;
+}
+
+
+.remember span{
+    margin-left: -5px;
+    color: #F28604 !important;
+}
+
+label.remember.item.item-checkbox.ng-empty.ng-valid{
+    margin-left: -22%;
+    border-top:none;
+}
+
+label.remember.item.item-checkbox.ng-valid.ng-not-empty{
+    margin-left: -22%;
+}
+
+label.remember1.item.item-checkbox.ng-empty.ng-valid{
+    margin-left: -22%;
+    border-top:none;
+}
+
+label.remember1.item.item-checkbox.ng-valid.ng-not-empty{
+    margin-left: -22%;
+}
+
+.remember1 div i.checkbox-icon{
+    margin-left: -101% !important;
+    width: 23px !important;
+    height: 23px !important;
+    top: 3px;
+}
+
+.remember1 span{
+    margin-left: -15px !important;
+    color: #F28604 !important;
+}
+
+.remember1 .item-content.disable-pointer-events{
+    margin-left:-54% !important;
+}
+.button.button-positive.active, .button.button-positive.activated {
+  border-color: #a2a2a2;
+
+  background-image: -webkit-linear-gradient(top, #a2a2a2 0, black  100%);
+
+
+}
+.tailgateLogoImg {
+  height: 100px !important;
+    width: inherit !important;
+}
+
+.tailgatelogoContainer {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    height:inherit;
+}
+.marginLeftSupplyText{
+  margin-left:40px;
+}
+.paddingTOpSupply{
+  margin-top: 1px;
+}
+
+/*Supplies*/
+.supplies_icon{
+    float: right;
+    padding-right: 10px;
+    font-size: 26px;
+    margin-top: -5px
+}
+
+.supplies_left_icon{
+    width:21px;
+    height:23px;
+    padding-left:10%;
+    top:20px;
+    float: right
+}
+
+.badge_supplies{
+    top:12px !important;
+}
+
+.supply_list_name{
+    color: #000000;
+    font-weight: 200
+}
+
+.badge.span_icon label{
+    float: right;
+}
+
+.suppliesList_ion_item{
+    color: #0f0f0f;
+}
+
+/*group detail*/
+.group_detail_user_role{
+    right: 12px !important;
+    height: 27px;
+    border-radius: 12px;
+}
+
+.roleText{
+    padding-top: 2px;
+    border-radius: 10px;
+}
+
+.add_member_details{
+    padding-top: 4px !important;
+}
+
+/*friends group*/
+.ion_item_animate{
+    padding: 0px;
+}
+
+div .user_added{
+    padding-top: 10px !important;
+}
+
+.add_in_group{
+    top:7px;
+    right:10px;
+}
+
+/*group member detail*/
+.user_role{
+    float: left;
+    margin-left: 14px
+}
+.group_member_detail_profile{
+    max-width: 210px;
+}
+
+/*Create group*/
+.create_group_badge{
+    right: 7px;
+}
+
+.group_user_name{
+    padding-left: 10px;
+}
+
+.add_new_friend{
+    right: 7px !important;
+}
+
+i.group_user_name.ng-binding{
+    color:darkorange;
+}
+
+/*Friend_detail*/
+.friend_profilepic{
+    max-width: 210px !important;
+}
+
+.friend_group_notification_div{
+    margin-right: 51px !important;
+}
+
+/*Manage_event_content*/
+.ion_content_header{
+    background-color: white;
+    padding-top:45px;
+}
+
+.manage_event_full_image{
+    height: 225px;
+}
+
+b .font_style{
+    font-size:16px;
+}
+
+div .manage_event_default_Image{
+    height:120px;
+    width: 100%;
+}
+
+/*Notification*/
+.badge_count{
+    margin-right: 35px;
+}
+
+/*My tailgate view location*/
+.google_map_div{
+    width:100%;
+    height:100%;
+}
+
+/*create supplies*/
+.supply_ion_item_animate{
+    padding:0px !important;
+}
+
+.create_supplies_label{
+    background-color: #ffffff !important;
+}
+
+.add_supplies_div{
+    background-color: #f4f4f4 !important;
+}
+
+.add_supplies_img{
+    float: right;
+}
+
+/*advertisement Popup*/
+.info_popup{
+    color: #00aaff !important;
+}
+
+.info_popup_address{
+    color: #ff8c00 !important;
+}
+
+.crossIconTailgate{
+  position:absolute;
+  font-weight:500;
+  font-size: 26px;
+  z-index: 2;
+}
+
+#traffic ul {
+  list-style: none;
+}
+#traffic ul {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 27px;
+  padding-top: 1px;
+  overflow: visible;
+}
+#traffic li{
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.fontSizeTrafficHeading{
+  font-size: 18px;
+}
+.removeBorderTraffic {
+  background-image:none;
+}
+.trafficDetailHeading{
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 80%;
+}
+
+.trafficSubDetailHeading{
+  font-weight: 700;
+  font-size: 14px;
+  width: 80%;
+}
+
+.TrafficInfoDescDiv{
+  width:80%;
+  margin-left: 30px;
+  margin-top: 5px;
+}
+.iw-content-text{
+  vertical-align: top;
+  text-align:left;
+  font-family: 'Avenir Next-Bold';
+  font-weight: bold;
+}
+
+/*Venue Map*/
+.image_map_div{
+    height:100% !important;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.venue_info_div{
+    width: 55%;
+    height: 32%;
+    margin-top: 16%;
+    margin-left: 22%;
+}
+
+.supplyItemText{
+    color: darkorange;
+    font-size: 13px;
+    font-weight: bold;
+}
+#venueInfo ul {
+  list-style: none; }
+
+#venueInfo li {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 1px;
+  overflow: visible; }
+
+#venueInfo li {
+  font-weight: 500;
+  font-size: 14px;
+  float:left !important;
+  padding-bottom: 10px !important;
+}
+
+#venueInfo a{
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.biggerFont{
+  font-size: 24px; padding-top: 6px;
+}
+.smallerFont{
+  font-size: 13px
+}
+.alignRight {
+  text-align:right;
+}
+.alignLeft {
+  text-align:left;padding: 0px 5px;
+}
+
+.venueMapImage {
+  height: 100%;
+  width: 100%;
+  -webkit-transition: all .6s ease;
+  -moz-transition: all .6s ease;
+  -ms-transition: all .6s ease;
+  transition: all .6s ease;
+}
+.zoomedvenueMapImage {
+  width: 200vw;
+  height: 200vw;
+}
+
+/*map svg images*/
+.map_info_img{
+    width: 32px !important;
+    height: 28px !important;
+    /*margin-top: -4px;
+    margin-left:17px;*/
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+.gm-style img {
+    max-width: none;
+    padding-top: 3px;
+}
+
+.ml0 {
+  margin-left: 0px !important;}
+
+.parent_div{
+    display: flex;
+    margin-right: -140px;
+}
+
+.text_div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 221px;
+  width: 60%;
+  font-size: 10px;
+   }
+
+    .placedetail_div{
+       
+    width: 100%;
+    font-size: 10px; /*change By pradeep*/
+     line-height:  15px;
+  }
+
+.list-thumbnail.listImages {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-height: 60px; }
+
+.list-thumbnail.listImages1 {
+  position: absolute;
+  left: 5px;
+  max-width: 55px;
+  max-height: 55px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5px;
+  margin-top: -3px; 
+  }
+ion-content.pane.tab-content.scroll-content.ionic-scroll.overflow-scroll.has-header.has-tabs {
+    top: 20px !important;
+}
+
+.platform-android .thumb-picturs-size {
+  width: 48%;
+  height: 101% !important;
+  border-right: solid white 2px;
+ }
+
+.thumb-picturs-size {
+    width: 35%;  
+    height: 101% !important;
+    border-right: solid white 2px;
+}
+ .no-popup-header .popup-head {
+  display: none;
+}
+.my-create-supply-view {.item-content {
+  position: relative;
+  z-index: 2;
+  padding:0;
+  border: none;
+  background-color: #fff;
+  }
+}
+.inpuBorder{
+  border: 2.5px solid #d3d3d3;
+  border-left: solid 3.5px #d3d3d3;
+  border-right: solid 3.5px #d3d3d3;
+}
+
+.inpuBorderEdit{
+  border: 2.5px solid #d3d3d3;
+  border-left: solid 3.5px #d3d3d3;
+  border-right: solid 3.5px #d3d3d3;
+  width:60%
+}
+.showNotificationTextArea {
+  width: 70%;
+  height: 70px;
+  border: solid .5px;
+  resize: none;
+  transition: .5s;
+  border-color: #f89734; }
+.hidemsgTexArea {
+  height: 0px;
+  width: 0px;
+  transition: .5s;
+  overflow: hidden;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  min-height: 100px;
+  height:100%;
+  width: 100vw;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 10;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  top: 75px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content li:hover {background-color: lightgray}
+
+.dropdown-content li {
+  padding-left: 10px;
+  border-color: grey;
+  border-width: 1px;
+}
+.whenNoMatchFound{
+  min-height: 35px;
+}
+i.icon.ion-person-stalker{
+    padding-left: 2%; }
+i.icon.ion-chatbox{
+    padding-left: 2%; }
+	
+.unreadMessageText{
+    font-weight: bold;
+}
+@media only screen and (min-width: 50px) {
+  div.post-content {
+    height: 31px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+    margin-top: 14px;
+    text-decoration: none;
+    padding-top: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 140px; } }
+ div.post-content-Notification {
+        height: 31px;
+        background-color: rgba(0, 0, 0, 0.63);
+        color: white;
+        position:absolute;
+        bottom: 45px;
+        right: 0;
+        float:right;
+        text-decoration: none;
+        padding-top: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        width: 180px; }
+div.post-content-Request {
+    height: 31px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+    position:absolute;
+    bottom: 0 ;
+    right: 0;
+    margin-bottom:2%;
+    text-decoration: none;
+    padding-top: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 215px; }
+	
+.icon.option_icon:before{
+    font-size: 36px;
+    margin-right: -3px;
+    margin-left: -13px;
+    margin-top:1px;
+}
+
+
+span.badge.span_icon_right {
+    right: -19px;
+    margin: -19px 0px 0px 0px;
+}
+
+.notificationCount{
+    margin-right: 4px;
+    margin-top: 10px;
+    color: #F89734;
+    text-decoration:none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+a.menu_notification{
+    text-decoration:none;
+    color:#F89734;
+    background-color:black;
+    font-size:20px;
+    margin-bottom:6px;
+    margin-top:10px !important;
+}
+
+.menu_span{
+    font-size:20px;
+    margin-right:19px;
+}
+
+label.item.item-icon-left.item-checkbox-right.item.item-checkbox.tailgate_admin{
+    width: 3pc;
+    margin-left: -7px;
+    border: transparent;
+    right: 14px !important;
+    margin-top:-17px;
+}
+
+
+
+.item-checkbox .checkbox{
+        right: 18px !important;
+}
+
+span.badgeCount{
+    position: absolute;
+    margin-top: -30px;
+    font-size: 13px;
+    border-radius: 9px;
+    width: auto;
+    padding-left: 3px;
+    padding-right: 3px;
+    height: 17px;
+    color: #F89734;
+    background-color: white;
+}
+
+.bar .buttons-right span{
+        margin-left: 7px !important;
+}
+
+.supply_content1{
+    background: inherit;
+    border: none;
+    max-width: 50%;
+    margin-left: 165px;
+    margin-top: -15%;
+    padding-top: 9px;
+}
+
+.supplyitem_tailgate{
+    background: inherit;
+    max-width: 50%;
+    float: right;
+}
+
+.tabs-positive > .tabs, .tabs.tabs-positive{
+    border-color: #ffffff !important;
+    background-color: #000000 !important;
+    background-image: linear-gradient(0deg, #ffffff, #ffffff 50%, transparent 50%) !important;
+    color: #fff !important;
+}
+
+/*SVG image to add event*/
+.span_plus{
+    height: 29px; 
+    width: 20px;
+}
+
+/*icon Chevron*/
+.icon_chevron{
+    float: right;
+    padding-right:10px;
+    font-size: 26px;
+    margin-top: -5px;
+}
+
+/*tailgate supply list*/
+span .span_icon_supply{
+    top:3px !important;
+}
+
+/*supply list*/
+.supply_list_name{
+    padding:10px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+#supplyEdit{
+    height: 47px;
+    width:100%;
+}
+
+.flask_text{
+    padding: 15px 11px 11px 16px;
+}
+
+#ItemEditBox{
+    border:solid 2.5px lightgray;
+    width: 100%;
+    height: 47px;
+}
+
+/*parking*/
+.searchParkingMarker{
+    cursor:pointer;
+}
+
+/*venueSubDetails*/
+.subDetails{
+    background: url(../img/flask_icons/star.svg) no-repeat left top;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+    padding-top: 1px;
+    overflow: visible;
+}
+
+.trafficSubDetail{
+    border-bottom: solid;
+    margin-top: 20px;
+}
+
+.venueInfoSubDetail{
+    margin-top:47%;
+}
+
+.subDetails span{
+    margin-left:27px;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    text-transform: none !important;
+}
+
+/*map*/
+.map_input{
+    margin: 10px;
+    width: 248px;
+}
+
+/*parking popup*/
+.popover{
+    top: 55% !important;
+    left: 94px !important;
+    margin-left: 28% !important;
+    width: 45% !important;
+    height: 23% !important;
+    opacity: 01 !important;
+    background-color: #f5f2f2 !important;
+    color: black !important;
+}
+
+.range{
+    margin-left:3% !important;
+}
+
+.range img{
+   height:2pc;
+   margin-left: -16px;
+}
+
+.range p{
+    margin-left: 10%;
+    font-weight: 500;
+}
+
+.ion_content_range{
+    margin-left:10px;
+    margin-top:7%;
+    background-color:#f5f2f2;
+    opacity:1;
+}
+.ion_content_range span{
+    margin-left:20%;
+    font-weight: 700;
+    margin-top:2%;
+}
+
+/*tailgate location marker*/
+.location-marker{
+    font-size: 14px;
+    padding-top: 5px;
+    color: #060606;
+}
+div#LocationMarkerInfoHeading {
+    text-align: center;
+    padding: 10px;
+    margin-top: -5px;
+    margin-left: -14px;
+    margin-right: -14px;
+    font-size: 16px;
+    background-color: black;
+    color: darkorange;
+}
+div#locationMarker {
+    padding: 5px 14px 16px 14px;
+    background-color: white;
+    max-height: 950px;
+}
+
+.infobox img{
+    display:none;
+}
+/*IOS Specific header*/
+/* iOS Specific Overrides to fix logo overlap */
+.platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+  margin-top: 25px;
+}
+.platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
+  height: 90px;
+}
+.platform-ios7.platform-cordova:not(.fullscreen) .has-header {
+  top: 90px;
+}
+/*IOS Specific header*/
+/*tailgate supply item*/
+.addNewTailgateItem{border-bottom:none;}
+
+#addSupplyListError{
+    margin: 9px 0px 9px 14%;
+    color: red;
+    display:none;
+}
+
+//For search box on events, My events and My friends page
+.searchChipDisplay{
+    margin-bottom: 10px;
+    cursor: default;
+    border-radius: 16px;
+    display: none;
+    height: 32px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    max-width: 100%;
+    position: relative;
+    font-size: 14px;
+    border-color: black;
+}
+
+.chipStrings{
+    text-transform:uppercase;font-size:11px;
+}
+
+/*modal animation for friend chat window*/
+
+.fade-in {
+  -webkit-transform: scale(0.0);
+  transform: scale(0.0);
+  opacity: 0;
+}
+.fade-in.ng-enter, .fade-in > .ng-enter {
+  -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 250ms;
+  transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 250ms;
+}
+.fade-in.ng-enter-active,
+.fade-in > .ng-enter-active {
+  -webkit-transform: scale(1.0);
+  transform: scale(1.0);
+  opacity: 1;
+}
+
+.fade-in.ng-leave, .fade-in > .ng-leave {
+  -webkit-transition: all ease-in-out 250ms;
+  transition: all ease-in-out 250ms;
+}
+
+/*Chat messaging*/
+.bubble{
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #f89734;
+    display: inline-block;
+    padding: 10px 18px;
+    position: relative;
+    vertical-align: top;
+}
+
+.bubble::before {
+    background-color: white;
+    content: "\00a0";
+    display: block;
+    height: 14px;
+    position: absolute;
+    top: 8px;
+    left: -10px;
+    box-shadow: -2px 2px 2px 0 rgba( 248, 51, 52, 0.2 );
+    transform: rotate( 29deg ) skew( -35deg );
+    -moz-transform: rotate( 29deg ) skew( -35deg );
+    -ms-transform: rotate( 29deg ) skew( -35deg );
+    -o-transform: rotate( 29deg ) skew( -35deg );
+    -webkit-transform: rotate( 29deg ) skew( -35deg );
+    width: 20px;
+}
+.bubble-you{
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 6px;
+    display: inline-block;
+    padding: 10px 18px;
+    position: relative;
+    vertical-align: top;
+}
+
+.bubble-you::before {
+    background-color: white;
+    content: "\00a0";
+    display: block;
+    height: 14px;
+    position: absolute;
+    top: 8px;
+    box-shadow: -2px 2px 2px 0 rgba( 255, 255, 255, 0.2 );
+    transform: rotate( 29deg ) skew( -35deg );
+    -moz-transform: rotate( 29deg ) skew( -35deg );
+    -ms-transform: rotate( 29deg ) skew( -35deg );
+    -o-transform: rotate( 29deg ) skew( -35deg );
+    -webkit-transform: rotate( 29deg ) skew( -35deg );
+    width: 20px;
+}
+
+.me {
+    float: left;   
+    margin: 1px 45px 5px 20px;        
+}
+
+.me::before {
+    box-shadow: -2px 2px 2px 0 rgb(249, 207, 165);
+    left: -9px;           
+}
+
+.you {
+    float: right;    
+    margin: 1px 20px 5px 45px !important;       
+}
+
+.you::before {
+    box-shadow: 2px -2px 2px 0 #908a8a;
+    right: -9px;    
+}
+
+.readFlag{
+    margin-top:11px;
+    margin-right: 7px;
+}
+
+.msgDate{
+    margin:-5px 0px -10px 19px;
+    float:right;
+    color:#F89734;
+    font-size: 10px;
+}
+
+.msgSender{
+    margin: -6px 0 5px -3px;
+    color:#F89734;
+    font-size: 12px;
+}
+
+.title.title-center.header-item{
+    left:0px !important;
+    right:0px !important;
+}
+.tungsten{
+  font-family: "Tungsten";
+}
+.suppliesEditButton{
+     width: 112px; padding: 4px;    float: right;
+}
+.updateSupllyItemButton{
+    top: 10px;
+    margin-bottom: 20px;
+}
+.whatToShow{
+    float:left;border: none; padding: 1px; padding-left: 5px; padding-right: 5px;
+}
+.viewEditSupplyItem{
+    margin-top:-71px;
+}
+.item.item-input-inset.addNewTailgateItem.viewEditSupplyItem {
+    border: solid 1px black;
+}
+button.button.button-block.button-positive.pay_now_button.updateSupllyItemButton {
+    margin-bottom: 30px;
+}
+/*for tailgate marker**/
+
+.tailgateLocationMarker{
+    overflow: auto;
+    margin: 3px -16px -14px -16px;
+    padding: 2px 10px 2px 10px;
+}
+.tailgatemakerName{
+    float:left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 20px;
+    width: 170px;
+}
+.tailgateDescriptionMarker{
+    float: left;
+    height: auto;
+    float: left;
+    overflow: scroll;
+}
+.tailgateImageOnMarker{
+    display: block;
+    width: 25px;
+    float: left;
+    margin-right: 10px;
+}
+.appversion{
+    color: #f89734;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+.listAlign{
+    padding-left: 30px;
+    padding-bottom: 12px;
+}
+.navigation{
+    text-align: left;
+}
+//for pinch zoom on venue map
+.zoom-pane {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.zoom-pane .scroll {
+    min-height: 100% !important;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;    
+}
+
+.zoom-pane img {
+    width: 100% !important;
+    vertical-align: top !important;
+}
+//find me locator
+
+.UserGeolabels{
+    position: absolute;
+    overflow: hidden;
+    opacity: 1;
+    z-index: 201;
+    display: block;
+    cursor: pointer;
+    background-color: white;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid;
+    font-family: 'Avenir Next';
+}
+
+.noMessage{
+    color: #f89734;
+}
+
+@-webkit-keyframes animateInPrimary {
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+ 
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+ 
+@-webkit-keyframes animateInSecondary{
+ 
+  0% {
+    opacity: 0;
+  }
+ 
+  50% {
+    opacity: 0;
+  }
+ 
+  100% {
+    opacity: 1;
+  }
+}
+ 
+.animate-in-primary {
+    -webkit-animation: animateInPrimary;
+    animation: animateInPrimary;
+    -webkit-animation-duration: 750ms;
+    animation-duraton: 750ms;
+}
+ 
+.animate-in-secondary {
+    -webkit-animation: animateInSecondary ease-in 1;
+    animation: animateInSecondary ease-in 1;
+    -webkit-animation-duration: 750ms;
+    animation-duraton: 750ms;
+}
+
+.chat-item.ng-enter-stagger {
+  -webkit-animation-delay:200ms;
+  animation-delay:200ms;
+  -webkit-animation-duration:0;
+  animation-duration:0;
+}
+
+.barStable{
+    background-image: linear-gradient(180deg, #db8e28, #db8e28 50%, transparent 50%);
+}
+.barMessageInput{
+    background: #fff;
+    border: 1px solid #db8e28;
+}
+
+.messages {
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -ms-flexbox !important;
+  display: -webkit-flex !important;
+  display: flex !important;
+  -webkit-align-content: center !important;
+  -ms-flex-line-pack: center !important;
+  align-content: center !important;
+  -webkit-box-align: center !important;
+  -moz-box-align: center !important;
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+  margin-bottom: 0px !important;
+  .message {
+    -webkit-box-flex: 1 !important;
+    -moz-box-flex: 1 !important;
+    -webkit-flex: 1 1 auto !important;
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
+    padding: 3px !important;
+    -webkit-transition: all 250ms ease-in-out !important;
+    transition: all 250ms ease-in-out !important;
+    overflow: hidden !important;
+    text-align: left !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    -moz-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+}
+
+.image-modal {
+    width: 100% !important;
+    height: 100%;
+    top: 0 !important;
+    left: 0 !important;
+}
+ 
+ 
+/*.slider {
+    width: 100%;
+    height: 100%;
+}*/
+ 
+.transparentModal {
+  background: rgba(0,0,0,0.7);
+}
+ 
+.tailgatePhotoslider {
+    width: 100%;
+    height: 100%;
+}
+ 
+.ZoomImage {
+    width: 100%;
+    height: 600px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center, center;
+}
+
+.notificationCountonHeaderBar{
+    margin-right: 30px;
+    margin-top: 10px;
+    color: #F89734;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.messagesGroupTitle{
+    font-size: 17px !important; 
+    font-weight: 600;
+    color: darkorange;
+    padding-left: 10px;
+}
+.messagesGroupSubTitle{
+    padding-left: 10px !important; 
+    color: black !important; 
+    font-weight: normal !important; 
+    font-size: 14px; 
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    padding-top: 4px !important;
+}
+.markerTakeMeThereImage{
+    display: block !important;
+    width: 25px;
+    float: left;
+    margin-right: 10px;
+}
+.markerTakeMeTherImageDivText{
+    font-weight:bold; 
+    float:left;
+    margin-top: 3px;
+}
+.markerTakeMeThereAHref{
+    float: left !important;  
+    color: black !important;
+}
+.markerTailgateDescription{
+    float: left !important;
+    height: 20px !important;
+    overflow-y: auto !important;
+}
+.markerTailgateName{
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    height: 17px !important;
+    width: 170px !important;
+    text-transform: none !important;
+}
+
+.selectedFilter{
+  background-color: #d2cfcf;
+}
+
+/* white background and box outline for map popup in google maps */
+.gm-style > div:first-child > div + div > div:last-child > div > div:first-child > div
+{
+    background-color: transparent !important;
+    box-shadow: none !important;
+    width: auto !important;
+    height: auto !important;
+}

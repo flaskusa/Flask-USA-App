@@ -1,0 +1,16 @@
+<div cache-view="false" style="">
+    <div class="sideImagePanel" style="height:200px !important">
+        <div class="left" style="margin-top:60px;margin-left: -10px;">
+            <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('tailgateImage-viewer')"></button>
+        </div>
+        <div class="right" style="margin-top:60px">
+            <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('tailgateImage-viewer')"></button>
+        </div>
+        <ion-slide-box delegate-handle="tailgateImage-viewer" show-pager='false' active-slide="currentIndex" does-continue="true" >
+            <ion-slide  ng-repeat="images in myTailgateImages" style="background-color: #666 !important;">
+                <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}" alt="Image not found"
+                     onError="this.src = 'img/FlaskRed.png';" style="width:initial; height: 200px;max-width: 100%;max-height: 100%;    object-fit: contain;" />
+            </ion-slide>
+        </ion-slide-box>
+    </div>
+</div>

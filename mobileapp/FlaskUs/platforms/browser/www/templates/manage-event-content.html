@@ -1,0 +1,115 @@
+<ion-view cache-view="false" class="my-view">
+
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-title>
+            <a href="#/app/events"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <div class="bar bar-subheader">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col col-90 event_name">
+                <div class="eventHeading2" style="text-transform:uppercase;text-align:center">
+                    <span class="overlineStyle">{{eventName}}</span></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <ion-content header="true" class="ion_content_header" overflow-scroll="false">
+        <a class="item item-full list-item-icon-left my-view" ng-click="addNewContent()"ng-if="editContent==false">
+            <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+            <p class="addText">ADD CONTENT</p>
+        </a>
+        <ion-list>
+            <!-- <ion-item ng-repeat="data in flaskUsDetails track by $index"class="row-no-padding"padding="false"ng-click="groupMemberDetail(data)"ng-if="editContent==false">-->
+            <div ng-repeat="data in flaskUsDetails track by $index" ng-if="editContent==false">
+                <div class="list card">
+
+                    <div>
+                        <div class="badge manageContentButtons extra-right-supply">
+                            <div class="button-assertive ion-trash-a icon supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}"ng-click="deleteEventDetail(data.eventDetailId,$index)"></div>
+                        </div>
+                        <div class="badge manageContentButtons extra-right-supply">
+                            <div class="button-assertive   ion-edit supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}" ng-click="editContents(data,$index)"></div>
+                        </div>
+                        <b class="font_style">{{ data.infoTitle}}</b>
+                        <p>{{ data.infoDesc}}</p>
+                    </div>
+
+                    <div class="item item-body" ng-if="data.imageUrl != undefined" style="overflow: scroll;overflow-x: scroll" overflow-scroll="false">
+                        <img class="manage_event_full_image" src={{data.imageUrl}}>
+                    </div>
+                    <!-- <a class="row-no-padding" style="text-decoration: none">
+                         &lt;!&ndash;href="#/app/my_friendDetail/{{data.userId}}"&ndash;&gt;
+                         <h3 class="emailText">{{ data.infoTitle}}</h3>
+                         <div class="col col-70">
+                             <h3 >{{ data.infoDesc}}</h3>
+                         </div>
+                     </a>-->
+                </div>
+            </div>
+
+
+            <!--  <ion-option-button  class="icon ion-edit"ng-click="editContents(data,$index)"></ion-option-button>
+              <ion-option-button class="icon ion-trash-a" ng-click="deleteEventDetail(data.eventDetailId,$index)"></ion-option-button>
+  -->
+
+            <a class="item" ng-if="flaskUsDetails.length == 0 && editContent==false">There are no contents to display.</a>
+        </ion-list>
+
+        <form name="create_content_form" class="loginpane form_div" novalidate  ng-submit="create_content_form.$valid && addContent(content,create_content_form)">
+            <div  ng-if="editContent==true">
+
+
+                <div class="item item-input item-floating-label"style="border-top: none;">
+                    <span class="input-label">Title</span>
+                    <input type="text" placeholder="Title" id="TitleEditBox" name="TailgateName" class="form-control" ng-model="content.infoTitle" required>
+                    <div ng-show="create_content_form.$submitted || create_content_form.TailgateName.$touched">
+                        <span ng-show="create_content_form.TailgateName.$error.required" class="error_msg">Enter title</span>
+                    </div>
+                </div>
+                <div class="item item-input item-floating-label">
+                    <span class="input-label">Description:</span>
+                    <input type="text" placeholder="Description" id="DescEditBox" name="Description" class="form-control" ng-model="content.infoDesc" required>
+                    <div ng-show="create_content_form.$submitted || create_content_form.Description.$touched">
+                        <span ng-show="create_content_form.Description.$error.required" class="error_msg">Enter description</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list"ng-if="editContent==true" >
+                <div class="list card" ng-click="show()">
+                    <div class="item item-image manage_event_default_Image" >
+                        <div ng-if="defaultImageUrl.length>0">
+                        <img src="{{defaultImageUrl}}" /></div>
+                        </div>
+                </div>
+                <a class="item text-center" href=""ng-click="show()" ng-if="defaultImageUrl==undefined || defaultImageUrl==''">
+                    Tap to add  picture
+                </a>
+                <a class="item text-center" href=""ng-click="show()" ng-if="defaultImageUrl!=undefined && defaultImageUrl!=''">
+                    Tap to update  picture
+                </a>
+
+            <div class="padding" align="center">
+                <button type="submit" nav-clear class="button button-block button-positive sign_in_button" >
+                    Save
+                </button>
+                <a nav-clear class="button button-block button-positive sign_in_button" ng-click="cancelEdit(create_content_form)">
+                    Cancel
+                </a>
+            </div>
+            </div>
+            </div>
+        </form>
+
+    </ion-content>
+
+</ion-view>

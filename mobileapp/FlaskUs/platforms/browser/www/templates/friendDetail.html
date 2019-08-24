@@ -1,0 +1,34 @@
+
+<ion-view cache-view="false" view-title="MY FRIENDS">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+  <ion-content class="text-center">
+    <div ng-if="profilepicUrl!=undefined"><img src="{{profilepicUrl}}" class="list-thumbnail friend_profilepic"  onError="this.src = 'img/default-profilepic-copy.png'" style="border-radius: 50%;display: inline-block;width: 200px;height: 200px;margin-top: 9px"/></div>
+      <div ng-if="profilepicUrl==undefined"><img src="img/default-profilepic-copy.png" class="list-thumbnail friend_profilepic"/></div>
+    <div>
+        <h2 class="eventNameCol" ng-bind-template="{{ friend.firstName }} {{ friend.middleName }} {{friend.lastName}}"></h2>
+        <p class="friend">{{friend.emailAddress}}</p>
+    </div>
+    <div id="toaster" ng-if="messageSentStatus==true" class="item toastDiv" style="text-align: center" ><i>Message sent successfully</i> </div>
+    <div  align="center">
+        <textarea ng-if="showTextArea.show==true" ng-model="message.messageToSend" id="textArea" class="showTextArea hideTexArea"autofocus></textarea>
+    </div>
+    <div align="center">
+        <button type="submit" nav-clear="" class="button button-block button-positive friend " ng-click="toggleMessageBox(message.messageToSend);">
+            Send Message
+        </button>
+        <button type="submit" ng-disabled="showenablebuttons!=true" nav-clear="" class="button button-block button-positive friend" ng-click="goToChatWindow(friend);">
+            View Messages
+        </button>
+        <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="initializeMediatorId(friend.userId)">
+            Add To Group
+        </button>
+    </div>
+    <a style="text-decoration: none" ng-click="initializeMediatorId(friend.userId)"></a>
+  </ion-content>
+</ion-view>

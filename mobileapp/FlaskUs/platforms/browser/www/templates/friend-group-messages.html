@@ -1,0 +1,157 @@
+<ion-view cache-view="false" view-title="MESSAGES" class="my-message-view" >
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-compose back_button_css" ng-click="showContactList()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+            <ion-content class="has-header">
+                <ion-scroll style="height: 99%;">
+                    <ion-list>
+                        <ion-item ng-repeat="data in newChatData track by $index" class="row-no-padding animate-in-secondary" padding="false" ng-click="getMsgType(data,data.isUser)" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
+                            <a class="row-no-padding" style="text-decoration: none">
+                                <!--href="#/app/my_friendDetail/{{data.userId}}"-->
+                                <div class="col col-20" ng-if="data.isUser==0">
+                                    <img src="img/default-group-pic.png" class="groupIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                </div>
+                                <div class="col col-20" ng-if="data.isUser==1">
+                                    <img ng-src="{{data.profilePic}}" onerror="this.src = 'img/default-profilepic-copy.png';" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                </div>
+                                <div class="col col-70" style="padding-top: 16px" ng-if="data.isUser==1">
+                                    <h3 class="nameText">{{ data.name | uppercase}}</h3>
+                                </div>
+                                <div ng-if="data.isUser==0">
+                                    <h3 class="messagesGroupTitle">{{data.name}}</h3>
+                                    <div class="messagesGroupSubTitle">{{data.description}}</div>
+                                </div>
+                                <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="data.unreadMessageCount !=0 && data.isUser==1">{{data.unreadMessageCount}}</span>
+                                <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="data.unreadMessageCount == 0">0</span>
+                                <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="data.unreadMessageCount !=0 && data.isUser==0">{{data.unreadMessageCount}}</span>
+
+                                <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
+                            </a>
+                            <ion-option-button class="icon ion-trash-a" ng-click="deleteConversation(data.id,data.isUser)"></ion-option-button>
+                        </ion-item>
+                        <div class="item" ng-show="newChatDataUnsorted.length==0">{{allChatMessages}}</div>
+                    </ion-list>
+              </ion-scroll>
+</ion-content>
+    <script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-pane class="messaging-view">
+                <ion-header-bar class="bar-dark">
+                    <ion-nav-bar class="bar-dark" align-title="center">
+                        <ion-nav-buttons side="left">
+                            <div class=" col col-20" ng-if="profilePic==undefined">
+                                <img src="img/default-profilepic-copy.png" class="chatIcon" ng-if="isUser == true">
+                                <img src="img/default-group-pic.png" class="chatIcon" ng-if="isUser != true">
+                            </div>
+                            <div class="col col-20" ng-if="profilePic!=undefined">
+                                <img ng-src="{{profilePic}}" class="chatIcon" ng-if="isUser == true">
+                                <img src="img/default-group-pic.png" class="chatIcon" ng-if="isUser != true">
+                            </div>
+                        </ion-nav-buttons>
+                        <ion-nav-title class="chatFriendName">
+                            <a href="" style="text-decoration:none;">{{friendName | uppercase}}</a>
+                        </ion-nav-title>
+                        <ion-nav-buttons side="right">
+                            <button class="button button-icon button-clear" ng-click="closeChatWindowPopup();" style="font-weight: bold;font-size: 23px;">X</button>
+                        </ion-nav-buttons>
+                    </ion-nav-bar>
+                </ion-header-bar>
+                <ion-content class="content-stable" style="background-color: rgba(211, 211, 211, 0.43); padding-bottom:15px;">
+                    <div ng-if="myMessages.length==0" class="item">{{insideChatMessage}}</div>
+                    <div style="padding-bottom:25px;padding-top: 20px;">
+                        <div click-for-options ng-repeat="message in myMessages | orderBy:'messageId' track by $index" class="messages">
+                            <div style="width: 100%;float: right;">
+                                <div style="width:100%">
+                                    <div class="col-60 bubble me" ng-if="message.senderUserId != loggedInUser" style="display: block;">
+                                        <p class="msgSender" ng-if="isUser != true">{{message.senderName}}</p>
+                                        <!--<p style="margin:-5px 0px -10px 19px;float:right;color:#F89734;font-size: 12px;" ng-click="deleteMessage(message.messageId);">X</p>-->
+                                        <p style="margin: -7px 0 1px !important;">{{message.message}}</p>
+                                        <p class="msgDate">{{message.diffDate}}</p>
+                                    </div>
+                                    <div class="col-60 bubble-you you slide-right" ng-if="message.senderUserId == loggedInUser" style="display: block;">
+                                        <p style="margin: -7px 0 1px !important;">{{message.message}}</p>
+                                        <p class="msgDate">{{message.diffDate}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </ion-content>
+                <ion-footer-bar keyboard-attach class="bar barStable item-input-inset">
+                    <label class="item-input-wrapper barMessageInput">
+                        <textarea ng-model="textMessage.messageToSend" id="textArea" placeholder="Type your message" on-return="sendReply(textMessage.messageToSend); closeKeyboard();" on-focus="inputUp();" on-blur="inputDown();" style="width:100%;resize: none;"/>
+                    </label>
+                    <button class="button button-clear button-small suppliesButton" ng-click="sendReply(textMessage.messageToSend);" ng-disabled="textMessage.messageToSend.length == 0">
+                        Send
+                    </button>
+                </ion-footer-bar>
+            </ion-pane>
+        </ion-modal-view>
+    </script>
+    <script id="templates/composeMessagesModal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-pane class="messaging-view">
+                <ion-header-bar class="bar-dark">
+                    <ion-nav-bar class="bar-dark" align-title="center">
+                        <ion-nav-title class="chatFriendName">
+                            <a href="" style="text-decoration:none;">Select Contact or Group To Chat</a>
+                        </ion-nav-title>
+                        <ion-nav-buttons side="right">
+                            <button class="button button-icon button-clear" ng-click="closeshowContactListWindowPopup();" style="font-weight: bold;font-size: 23px;">X</button>
+                        </ion-nav-buttons>
+                    </ion-nav-bar>
+                </ion-header-bar>
+                <ion-content class="content-stable">
+                    <div class="row">
+                        <div class="col col-100 col-center searchrow">
+                            <input type="text" placeholder="Search..." class="friendSearch" ng-model="searchContact" />
+                        </div>
+                    </div>
+                    <ion-scroll style="height: 90%;">
+                        <ion-list>
+
+                            <ion-item ng-repeat="friend in allFriends | orderBy:'fullName' | filter:searchContact track by $index" class="row-no-padding item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" padding="false" ng-click="callConactsPopup(friend,'user')">
+                                <a class="row-no-padding" style="text-decoration: none">
+                                    <!--href="#/app/my_friendDetail/{{friend.userId}}"-->
+                                    <div class="col col-20" ng-if="friend.friendProfilePicUrl==undefined">
+                                        <img src="img/default-profilepic-copy.png" class="friendIcon" onError="this.src = 'img/default-profilepic-copy.png';" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                    </div>
+                                    <div class="col col-20" ng-if="friend.friendProfilePicUrl!=undefined">
+                                        <img ng-src="{{friend.friendProfilePicUrl}}" onError="this.src = 'img/default-profilepic-copy.png';" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                    </div>
+                                    <div class="col col-70" style="padding-top: 16px">
+                                        <h3 class="nameText">{{ friend.fullName | uppercase}}</h3>
+                                    </div>
+                                    <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
+                                </a>
+                                <ion-option-button class="icon ion-trash-a" ng-click="unFriend(friend.userId)" style="display:none;"></ion-option-button>
+                                <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(friend.userId)" style="display:none;"></ion-option-button>
+                            </ion-item>
+                            <ion-item class="animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="group in groups | filter:searchContact track by $index" padding="false" style="height: 74px;" ng-click="callConactsPopup(group,'group')">
+                                <div>
+                                    <a class="itemAnchor">
+                                        <div>
+                                            <img src="img/default-group-pic.png" class="groupIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                        </div>
+                                        <div>
+                                            <h3 class="messagesGroupTitle">{{group.groupName}}</h3>
+                                            <div class="messagesGroupSubTitle">{{group.groupDescription}}</div>
+                                        </div>
+                                        <span class="badge span_icon span_icon_extraright" style="top:24px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
+                                    </a>
+                                </div>
+                            </ion-item>
+                        </ion-list>
+                    </ion-scroll>
+                </ion-content>
+            </ion-pane>
+        </ion-modal-view>
+    </script>
+</ion-view>

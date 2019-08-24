@@ -1,0 +1,92 @@
+﻿<ion-view cache-view="false" view-title="USER REGISTRATION" back-button="true">
+    <ion-content overflow-scroll="false">
+            <form name="register_user_form" class="loginpane form_div" novalidate ng-submit="register_user_form.$valid && saveUser(user)">
+                <div>
+                    <div class="list">
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">First name</span>
+                            <input type="text" placeholder="First name" name="firstName" class="form-control" ng-model="user.firstName" required>
+                            <div ng-show="register_user_form.$submitted || register_user_form.firstName.$touched"  class="ng-hide">
+                                <span ng-show="register_user_form.firstName.$error.required" class="error_msg">Please enter your first name.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Last name</span>
+                            <input type="text" placeholder="Last name" name="lastName" class="form-control" ng-model="user.lastName" required>
+                            <div ng-show="register_user_form.$submitted || register_user_form.lastName.$touched"  class="ng-hide">
+                                <span ng-show="register_user_form.lastName.$error.required" class="error_msg">Please enter your last name.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Email</span>
+                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="!register_user_form.Email.$error.required && !register_user_form.Email.$error.email && checkUserByEmailId(user.Email);">
+                            <div ng-show="register_user_form.$submitted || register_user_form.Email.$touched"  class="ng-hide">
+                                <span ng-show="register_user_form.Email.$error.required" class="error_msg">Please enter your email.</span>
+                                <span ng-show="register_user_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
+                                <span ng-show="duplicateEmail==true" class="error_msg">This Email Address already exists.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Password</span>
+                            <input type="password" placeholder="Password" class="form-control" ng-model="user.password1" name="password1" required="">
+                            <div ng-show="register_user_form.$submitted || register_user_form.password1.$touched"  class="ng-hide">
+                                <span ng-show="register_user_form.password1.$error.required" class="error_msg">Please enter password.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Confirm password</span>
+                            <input type="password" placeholder="Confirm password" class="form-control" ng-model="user.password2" name="password2" required="">
+                            <div ng-show="register_user_form.$submitted || register_user_form.password2.$touched"  class="ng-hide">
+                                <span ng-show="register_user_form.password2.$error.required" class="error_msg">Please enter confirm password.</span>
+                                <span ng-show="user.password1!=user.password2 && !register_user_form.password2.$error.required" class="error_msg">Confirm password did not match!</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-stacked-label">
+                            <span class="input-label has-input">Zip code</span>
+                            <input type="text" placeholder="Optional" class="form-control" ng-model="user.areaCode" name="areaCode" ng-maxlength="15" ng-minlength="3" style="background-color: #f9f9f9;">
+                            <div ng-show="register_user_form.$submitted || register_user_form.areaCode.$touched"  class="ng-hide">
+                                <span ng-show="register_user_form.areaCode.$error.required" class="error_msg">Please enter zip code.</span>
+                                <span ng-show="!register_user_form.areaCode.$error.required && register_user_form.areaCode.$error.maxlength" class="error_msg">max length should be 15.</span>
+                                <span ng-show="!register_user_form.areaCode.$error.required && register_user_form.areaCode.$error.minlength" class="error_msg">min length should be 3.</span>
+
+                            </div>
+                        </div>
+                        <div class="item item-input item-stacked-label item-icon-right">
+                            <span class="input-label has-input">Date of Birth</span>
+                            <input type="text" ng-disabled="true" placeholder="Optional" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
+                            <i class="icon ion-ios-calendar-outline" style="top: 15px;" ng-click="openDatePickerOne();"></i>
+                        </div>
+                        <div class="item item-input">
+                            <span class="input-label">Gender</span>
+                            <pre><ion-radio type="radio" ng-model='user.isMale' on-tap="getTap('tap')" ng-value="true" name="rdoResult">Male</ion-radio></pre>
+                            <pre><ion-radio type="radio" ng-model='user.isMale' on-tap="getTap('tap')" ng-value="false" name="rdoResult">Female</ion-radio></pre>
+                        </div>
+
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Mobile</span>
+                            <input type="text" placeholder="Mobile" name="mobileNumber" ng-model="user.mobileNumber">
+                        </div>
+
+                        <div class="item item-checkbox" style="background-color: #f9f9f9;">
+                            <label class="checkbox eulacheckbox" style="right: auto !important;">
+                                <input ng-model="user.agreedToTermsOfUse" type="checkbox" name="agreedToTermsOfUse" style="width: 22px !important;height: 22px !important;">
+                            </label>
+                                 I accept the  <a ng-click="showEULA();" style="color: #d3802c;"><u>Terms and Conditions</u></a>
+                            <div ng-show="register_user_form.$submitted || register_user_form.agreedToTermsOfUse.$touched"  class="ng-hide">
+                                <span ng-show="register_user_form.agreedToTermsOfUse.$error.required" class="error_msg">You Must Agree to Terms and Conditions.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="padding" align="center">
+                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" >
+                            Save
+                        </button>
+                        <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </form>
+</ion-content>
+</ion-view>

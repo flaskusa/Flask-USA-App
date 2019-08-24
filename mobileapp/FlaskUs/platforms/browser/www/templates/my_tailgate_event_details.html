@@ -1,0 +1,123 @@
+﻿<ion-view view-title="TAILGATE DETAILS" cache-view="false">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-edit edit_tailgate" ng-click="checkTailgateId();" ng-show="isTailgateAdmin"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content overflow-scroll="false" >
+        <div class="list tab1">
+            <!-- Tab 1 content -->
+            <div class="animate-in-primary">
+                <img ng-src="{{tailgateLogoUrl}}" class="myTailgatetopImg "/>
+            </div>
+            <div class="mytailgate_Heading " style="border: solid 1px;border-left-color: white;border-right-color: white;">
+                <h3><span class="overlineStyle">{{myTailgate.tailgateName}}</span></h3>
+            </div>
+            <div class="eventDiv  chat-item ng-enter-stagger">
+                <a class="item item-icon-right tailgateEventList" href="#/app/pre_post_game/{{myTailgate.eventName}}/{{myTailgate.eventId}}/{{data.venueId}}">
+                    <h2 class="tailgateEventNameCol">{{myTailgate.eventName}}</h2>
+                    <p class="tailgateDateCol">{{myTailgate.tailgateDate | date:'EEEE, MMMM dd, yyyy'}}</p>
+                    <span class="badge span_icon span_icon_extraright "><img src="img/flask_icons/arrow_left.svg"></span>
+                </a>
+            </div>
+            <div class="tailgateInfo tailgateInfoborder  chat-item.ng-enter-stagger">
+                <div class="row">
+                    <div class="col" style="width:155px;"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
+                    <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="tailgateDescFont">TAILGATE DETAILS</div><span class="tailgate_Info">{{myTailgate.tailgateDescription}}</span></div>
+                </div>
+            </div>
+            <div class="pic_gallery tailgateInfoborder  chat-item ng-enter-stagger">
+                <div class="row">
+                    <div class="col">
+                        <div class="tailgateDescFont">PICTURES</div>
+                        <span style="overflow:scroll">
+                            <a class="item photoitem" data-ng-click="showPictureChooser()">
+                                <div><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+                                <p class="photobuttontext">ADD <br /> PHOTO</p>
+                            </a>
+                            <a class="item item-list-detail image_list">
+                                <ion-scroll direction="x" class="tailgate_thumb" style="overflow: scroll;overflow-x: scroll" overflow-scroll="false">
+                                    <span ng-repeat="images in myTailgateImages">
+                                        <span data-ng-click="removeTailgateImage($index,images.tailgateImageId,images.imageUUID)" ng-if = "isTailgateAdmin"><i  class="crossIconTailgate"><img src="img/flask_icons/delete.svg" style="width: 20px;height: 20px;"/></i></span>
+                                        <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}"  class="list-thumbnail thumb-picturs-size " alt="Image not found"
+                                        onError="this.src = 'img/FlaskRed.png';" ng-click="showImages($index)"/>
+                                    </span>
+                                </ion-scroll>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="message_board  chat-item ng-enter-stagger">
+                <div class="row">
+                    <div class="col">
+                        <div class="msgboard_div">MESSAGE BOARD</div>
+                        <span>
+                            <div class="list list-inset msgboard" keyboard-attach>
+                                <div class="col-col-70 msg_input">
+                                    <label class="item item-input item-icon-right" style="">
+                                        <input type="text" placeholder="Type Message Here..." on-return="saveMessage(usersMessages.message); closeKeyboard();" ng-model="usersMessages.message" on-focus="inputUp();" on-blur="inputDown();">
+                                    </label>
+                                </div>
+                                <div class="col-col-15 msg_list">
+                                    <span class="badge span_icon" ng-click="saveMessage(usersMessages.message);"><img src="img/flask_icons/arrow_left.svg"></span>
+                                </div>
+                            </div>
+                            <div class="list  chat-item ng-enter-stagger">
+                                <div class="messageList" ng-repeat="data in messageUser">
+                                    <img ng-if="data.userPicUrl.length==undefined" class="default_img" ng-src='img/default-profilepic-copy.png' style="margin-top: 4px">
+                                    <img ng-if="data.userPicUrl.length>0" class="default_img" ng-src='{{data.userPicUrl}}' style="width: 40px;max-width: 65px;height: 40px;border-radius: 50%;margin-top: 4px">
+                                    <p class="profile_name text_div_message" style="margin-top:-4px">@{{data.username}}</p>
+                                    <div>
+                                        <p class="message_username " style="margin-top:0px">@{{data.username}}</p>
+                                        <p class="messageTxt ">{{data.message}}</p><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <script id="templates/pictureModal.html" type="text/ng-template">
+        <ion-header-bar class="bar-dark">
+            <ion-nav-bar class="bar-dark" align-title="center">
+                <ion-nav-title class="chatFriendName">
+                    <a href="" style="text-decoration:none;">Photo Gallery</a>
+                </ion-nav-title>
+                <ion-nav-buttons side="right">
+                    <button class="button button-icon button-clear" ng-click="closeModal();" style="font-weight: bold;font-size: 23px;">X</button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+        </ion-header-bar>
+        <ion-content class="content-stable">
+            <div class="modal image-modal transparentModal" on-swipe-down="closeModal()">
+                <!--<div class="left" style="height: 100% !important;left:0px !important;">
+                    <button class="button button-icon icon ion-chevron-left slider_arrow" style="opacity:2 !important" ng-click="slidePrevious1()"></button>
+                </div>
+                <div class="right" style="height: 100% !important;">
+                    <button class="button button-icon icon ion-chevron-right slider_arrow" style="opacity:2 !important" ng-click="slideNext1()"></button>
+                </div>-->
+                <ion-slide-box on-slide-changed="slideChanged(index)" show-pager='true' active-slide="activeSlide">
+                    <ion-slide ng-repeat="image in myTailgateImages" style="background: rgba(211, 211, 211, 0);">
+                        <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false"
+                                    zooming="true" min-zoom="{{zoomMin}}" style="width: 100%; height: 100%"
+                                    delegate-handle="scrollHandle{{$index}}" on-scroll="updateSlideStatus(activeSlide)" on-release="updateSlideStatus(activeSlide)" Overflow-scroll="false">
+                                    <div class="ZoomImage" style="height: 100% !important;background-image: url( {{imgUrl}}{{image.imageUUID}}&groupId={{image.imageGroupId}} )"></div>
+                        </ion-scroll>
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+       </ion-content>
+</script>
+</ion-view>

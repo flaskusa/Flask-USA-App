@@ -1,0 +1,31 @@
+<ion-view cache-view="false" view-title="NOTIFICATION" ng-init="initialize()">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button back-button buttons button-clear header-item" ng-click="goToNavigator()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content >
+        <ion-list>
+            <ion-item ng-click="goToMessages()" class="animate-in-secondary chat-item.ng-enter-stagger">
+                <h3 class="nameText emailText">MESSAGES</h3>
+                <a ><span  class="badge badge-assertive badge_count">{{messageCount}}</span>
+                    <div>
+                        <span class="badge extra-right-supply badge_supplies"><img src="img/flask_icons/arrow_left.svg" class="supplies_left_icon"></span>
+                    </div>
+                </a>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-item ng-click="goToNotifications()" class="animate-in-secondary chat-item.ng-enter-stagger">
+                <h3 class="nameText emailText">FRIEND REQUESTS</h3>
+                <a ><span  class="badge badge-assertive badge_count">{{notificationCount}}</span>
+                    <div >
+                        <span class="badge extra-right-supply badge_supplies"><img src="img/flask_icons/arrow_left.svg" class="supplies_left_icon"></span>
+                    </div>
+                </a>
+            </ion-item>
+        </ion-list>
+        </ion-content>
+    </ion-view>

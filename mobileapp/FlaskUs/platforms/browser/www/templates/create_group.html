@@ -1,0 +1,78 @@
+<ion-view back-button="true" cache-view="false" view-title="CREATE GROUP">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
+        </ion-nav-buttons>
+    <ion-content>
+        <form name="create_group_form" class="loginpane form_div" novalidate  ng-submit="create_group_form.$valid && createGroup(groupName.name,groupName.description)">
+            <div class="loginpane_body">
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Group name</span>
+                        <input type="text" placeholder="Group name" class="form-control loginInputs" ng-model="groupName.name" name="GroupName" required>
+                        <div ng-show="create_group_form.$submitted || create_group_form.GroupName.$touched">
+                            <span ng-show="create_group_form.GroupName.$error.required" class="error_msg">Enter group name</span>
+                        </div>
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Description</span>
+                        <input type="text" placeholder="Description" class="form-control loginInputs" ng-model="groupName.description" name="Description" required>
+                        <div ng-show="create_group_form.$submitted || create_group_form.Description.$touched">
+                            <span ng-show="create_group_form.Description.$error.required" class="error_msg">Enter description</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="padding" align="center">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
+                       Save
+                    </button>
+                    <a nav-clear class="button button-block button-positive sign_in_button"ng-click="cancel()">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+            <script id="templates/modal.html" type="text/ng-template">
+            <ion-modal-view >
+                <ion-nav-bar class="bar-dark" align-title="center">
+                    <ion-nav-buttons side="left">
+                        <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="finishAddingMember();"></button>
+                    </ion-nav-buttons>
+                    <ion-nav-title>
+                        <a href="" style="text-decoration:none;">ADD MEMBER</a>
+                    </ion-nav-title>
+                </ion-nav-bar>
+                <div class="bar bar-subheader">
+                    <div class="row">
+                        <div class="col col-90 col-center searchrow">
+                            <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext"/>
+                        </div>
+                        <div class="col col-center searchrow">
+                            <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
+                        </div>
+                    </div>
+                </div>
+                <ion-content class="padding has-subheader">
+                    <ion-list>
+                        <ion-item class="item-avatar item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="data in memberToAddInGroup | filter:searchContact.searchtext" class="item-avatar " item="data">
+                            <img src = "img/default-profilepic-copy.png" ng-if="data.friendProfilePicUrl==undefined">
+                            <img ng-src = "{{data.friendProfilePicUrl}}" onError="this.src = 'img/default-profilepic-copy.png';" ng-if="data.friendProfilePicUrl!=undefined">
+
+                            <h2>{{ data.fullName | uppercase}}</h2>
+                            <p>{{ data.emailAddress}}</p>
+                            <span class="badge"style="right: 7px"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons "ng-click="addUserToGroup(data)"></span>
+                        </ion-item>
+                        <a class="item" ng-if="memberToAddInGroup.length == 0"> There is no more friends to add. </a>
+                        <div class="padding" align="center">
+                            <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="finishAddingMember()">
+                                Finish
+                            </a>
+                        </div>
+                    </ion-list>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

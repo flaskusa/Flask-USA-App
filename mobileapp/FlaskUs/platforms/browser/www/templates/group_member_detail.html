@@ -1,0 +1,25 @@
+
+<ion-view cache-view="false" view-title="MY FRIENDS">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button class="button-icon icon  ion-ios-arrow-back ">
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content class="text-center">
+        <div ng-if="friend.friendProfilePicUrl==undefined"><img src = 'img/default-profilepic-copy.png' class="group_member_detail_profile" /></div>
+        <div ng-if="friend.friendProfilePicUrl!=undefined"><img ng-src = '{{friend.friendProfilePicUrl}}' class="group_member_detail_profile" style="border-radius: 50%; display: inline-block;  width: 200px; height: 200px;margin-top: 9px" /></div>
+        <div>
+            <h2 class="eventNameCol" ng-bind=" friend.userName"></h2>
+            <p class="friend">{{friend.emailAddress}}</p>
+            <li class="item item-toggle">
+                <b ng-if="friend.isAdmin==1" class="user_role">Admin </b>
+                <b ng-if="friend.isAdmin==0" class="user_role">User</b>
+                <label class="toggle toggle-positive">
+                    <input type="checkbox" ng-model="friend.isAdmin" ng-disabled="isLoginUserAdmin==false || disableToggleButton==true" ng-true-value=1 ng-false-value=0 ng-change="showConfirm(friend)">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </li>
+        </div>
+    </ion-content>
+</ion-view>

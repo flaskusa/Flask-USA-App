@@ -8,15 +8,18 @@
     var setMessageReadUrl = "/set-read";
     var errorLog = [];
     //production server settings
+    //Current Flask Site
     flaskAppConfig.value("SERVER", {
         "hostName": "https://www.flask-usa.com/",
         "url": "https://www.flask-usa.com/api/jsonws/",
+        //Updated IP
        //"hostName": "http://52.54.164.161/", //production ip
        //"url": "http://52.54.164.161/api/jsonws/",
        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
 		"cacheExpireTime":1000
     })
  
+    //Old Site Setup
     //test server settings
     // flaskAppConfig.value("SERVER", {
     //   "hostName": "http://52.44.202.166/",

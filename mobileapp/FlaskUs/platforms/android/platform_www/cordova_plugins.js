@@ -345,6 +345,6 @@ module.exports.metadata =
     "cordova-plugin-touchid": "0.4.0",
     "cordova-plugin-file": "4.3.3",
     "cordova-plugin-file-transfer": "1.6.3"
-};
+}
 // BOTTOM OF METADATA
 });

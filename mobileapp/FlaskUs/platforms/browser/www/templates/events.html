@@ -1,0 +1,78 @@
+<ion-view cache-view="true" class="customFooter">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+        <ion-nav-title>
+            <a href="#/app/events"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox" ng-cloak>
+        <form name="search_form" novalidate ng-submit="search_form.$valid && get_data_from_search(searchstringList)">
+            <div class="row">
+                <div class="col col-100 col-center searchrow">
+                    <input type="text" placeholder="Search event..." class="searchboxArea" ng-model="searchstringList.searchString" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-100 col-center searchrow">
+                    <select class="searchboxArea" ng-model="searchstringList.days" required>
+                        <option value="0">Today</option>
+                        <option value="7">7 Days</option>
+                        <option value="14">14 Days</option>
+                        <option value="30">30 Days</option>
+                        <option value="60" ng-selected="true">60 Days</option>
+                    </select>
+                </div>
+            </div>
+            <!--<div class="row">
+                <div class="col col-100 col-center searchrow">
+                    <input type="text" placeholder="Zip code..." class="searchboxArea" id="zipCode" name="zipCode" ng-model="searchstringList.zipcode" />
+                </div>
+            </div>-->
+            <div class="row">
+                <div class="col col-center searchrow">
+                    <button type="submit" class="button button-clear button_search" >SEARCH</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <ion-content class="has-footer" ng-click="searchBox.showBox = false" overflow-scroll="false" >
+        <div ng-cloak>
+            <div>
+                <h3 class="eventHeading"><span class="overlineStyle">EVENTS NEAR YOU</span></h3>
+            </div>
+            <div id="searchChip" class="item searchChipDisplay" >
+                <div class="row" style="padding: 0px;">
+                    <div class="col" style="width: 100%; max-width: 189px;"><p class="chipStrings" style="width: 126%;"><b>Filtered By : </b>{{searchstringList.searchString}}</p></div>
+                    <div class="col" style="margin-left: 47px;"><p class="chipStrings"><b>Days : </b>{{searchstringList.days}}</p></div>
+                    <div class="col" ng-click="clearSearchResults()"><i class="icon ion-close" style="float:right;"></i></div>
+                </div>
+            </div>
+            <div class="card" ng-show="Event_Error">
+                <div class="item item-text-wrap">
+                    {{eventList_data}}
+                </div>
+            </div>
+            <div class="list" ng-show="Event_Error == false">
+                <a class="item item-thumbnail-left item-icon-right eventList chat-item.ng-enter-stagger" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent">
+                    <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
+                    <h2 class="eventNameCol">{{data.eventName}}</h2>
+                    <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
+                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | <span class="cityVenuCol ml0">{{data.cityName}}</span></p>
+                    <span class="badge span_icon" ng-if="!data.userEvent=='1' && show_login"><img src="img/flask_icons/arrow_left.svg"></span>
+                    <span class="badge span_icon" ng-if="data.userEvent=='1' && show_login"><img class="star_icon_svg" src="img/flask_icons/ARROW_STAR.svg"></span>
+                    <span class="badge span_icon" ng-if="!show_login"><img src="img/flask_icons/arrow_left.svg"></span> 
+                    <!--<div star_div_icon" ng-if="data.userEvent=='1'"><></div>-->
+                </a>
+            </div>
+        </div>
+    </ion-content>
+
+    <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
+        <div ng-include="'templates/advertisement.html'"class="footer-img" ng-if="showAddv==true"></div>
+    </ion-footer-bar>
+</ion-view>

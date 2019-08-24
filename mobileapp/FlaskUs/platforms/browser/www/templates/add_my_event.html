@@ -1,0 +1,53 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button class="button-icon icon  ion-ios-arrow-back ">
+        </ion-nav-back-button>
+        <ion-nav-title>
+            <a href="#/app/events"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <div class="bar bar-subheader srchBgCol" ng-show="searchBox.showBox">
+        <div class="row searchrow">
+            <div class="col col-100 col-center searchrow">
+                <input type="text" placeholder="Search event..." class="searchboxArea" ng-model="eventList.searchString" autofocus/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-center searchrow">
+                <button class="button button-clear button_search" ng-click="searchMyEvents(eventList.searchString);">SEARCH</button>
+            </div>
+        </div>
+    </div>
+    <ion-content class="has-footer" ng-click="searchBox.showBox = false">
+        <div>
+            <a class="item item-full" href="#/app/my_events">
+                <p class="addText" align="center">EVENT LIST</p>
+            </a>
+            <div class="card" ng-show="AddedSuccess">
+                <div class="item item-text-wrap successColor">
+                    Added successfully !!
+                </div>
+            </div>
+            <div class="card" ng-show="Add_Event_Error">
+                <div class="item item-text-wrap">
+                    There are no events to add.
+                </div>
+            </div>
+            <div class="list">
+                <a class="item item-thumbnail-left item-icon-right eventList item-remove-animate" ng-repeat="data in myFilteredEvent">
+                    <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
+                    <h2 class="eventNameCol">{{data.eventName}}</h2>
+                    <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
+                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
+                    <span class="badge span_icon span_plus" ng-click="addmyEvent(data.eventId,$index)"><img src="img/flask_icons/add_new.svg"></span>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
+        <div ng-include="'templates/advertisement.html'"class="footer-img"></div>
+    </ion-footer-bar>
+</ion-view>

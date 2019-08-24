@@ -1,0 +1,81 @@
+﻿<ion-view view-title="TAILGATE PLAN" cache-view="false">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-edit edit_tailgate" ng-click="goToPlanNowTab();" ng-show="isTailgateAdmin"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="padding" overflow-scroll="false">
+        <div class="paynow">
+            <div class="tailgateInfo">
+                <div class="row">
+                    <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
+                    <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
+                </div>
+                <div class="row">
+                    <button nav-clear class="button button-block button-positive pay_now_button" ng-click="fnPayNow();">
+                        Pay Now
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="list">
+            <div class="item item-divider plan_now">                
+                <div class="whatToShow">WHAT TO BRING</div>
+                <div class="button button-small suppliesEditButton" ng-click="showEditForm();" ng-show="isTailgateAdmin">EDIT ITEM LIST</div>
+            </div>
+        </div>
+        <a class="item" ng-if="allMyTailgateItems.length == 0"> You do not have any supply items... </a>
+        <ion-list id="showSupplyListItems">
+            <ion-item ng-repeat="tailgateItem in allMyTailgateItems track by $index" class="animate-in-secondary chat-item.ng-enter-stagger">
+                <div class="col-100">                   
+                    <div style="float:left"> <i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i>
+                    </div>
+                    <i style="color: black;font-weight: 500;float:right;">{{tailgateItem.itemAssignedUserName}}</i>
+                </div>
+
+            </ion-item>
+        </ion-list>
+        <br><br><br>
+        <ion-list show-delete="false" can-swipe="true" ng-hide="collapsedItems" id="editSupplyListItems" style="display:none;">
+            <div class="item item-input-inset addNewTailgateItem viewEditSupplyItem">
+                <label class="item-input-wrapper" style="background-color: white;">
+                    <div class="inpuBorderEdit" style="width: 80%">
+                        <input type="text" id="addTailgateSupplyItemBox" style="width:100%" ng-class="{Upper_Case:listItemName!='' && listItemName!=undefined}" placeholder="Item name" ng-model="listItemName">
+                    </div>
+                </label>
+                <button class="button button-small suppliesButton" ng-click="saveTailgateSupplyItem(listItemName);">
+                    Save
+                </button>
+                <button class="button button-small suppliesButton" ng-click="cancelTailgateSupplyItemAdding();">
+                    Cancel
+                </button>
+            </div>
+            <p id="addSupplyListError">Select Supply List To Add Supply Item!</p>
+            <ion-item class="myList item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="tailgateItem in allMyTailgateItems track by $index" style="font-family:inherit;font-size:inherit">
+                <span class="emailText"><i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i></span>
+                <select class="supplyitem_tailgate flaskSelect" ng-model="tailgateItem.itemAssignedUserId" ng-init="tailgateItem.itemAssignedUserId = (tailgateItem.itemAssignedUserId == undefined) ? '-1' : tailgateItem.itemAssignedUserId"
+                        ng-change="updateSupplyItemsUser(tailgateItem,$index);">
+                    <option value="-1">Select attendee</option>
+                    <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
+                </select>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveSupplyItem(tailgateItem.supplyItemId,$index);"></ion-option-button>
+            </ion-item>
+            <button nav-clear class="button button-block button-positive pay_now_button updateSupllyItemButton" ng-click="addSupplyItems();" >
+                Update item list
+            </button>
+        </ion-list>
+        <a class="item" ng-if="myTailgaters.length == 0"> You do not have any tailgater yet. Please search and add tailgaters </a>
+    </ion-content>
+</ion-view>
